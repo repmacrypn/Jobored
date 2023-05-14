@@ -1,0 +1,22 @@
+.vacanciesMainField {
+    display: grid;
+    grid-template-columns: 162px 315px 773px;
+    grid-template-areas: '. filterField searchField';
+}
+
+.filterField {
+    grid-area: filterField;
+    background-color: #FFFFFF;
+    border: 1px solid #EAEBED;
+    border-radius: 12px;
+    padding: 20px;
+    width: 315px;
+    height: 360px;
+    margin-top: 40px;
+}
+
+.contentField {
+    grid-area: searchField;
+    margin-left: 28px;
+    margin-top: 104px;
+}
