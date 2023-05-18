@@ -1,0 +1,62 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1440px;
+    height: 84px;
+    padding: 10px 162px;
+
+    background: white url('../../resources/images/logoPicture.png') no-repeat 162px 27px/30px 30px;
+}
+
+.logoTitle {
+    color: #232134;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -0.02em;
+
+    width: 99px;
+    height: 36px;
+
+    position: absolute;
+    left: 204px;
+    top: 24px;
+}
+
+.nav {
+    display: flex;
+    gap: 60px;
+    width: 275px;
+    height: 20px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.vacancies {
+    width: 129px;
+    height: 20px;
+}
+
+.fav {
+    width: 86px;
+    height: 20px;
+}
+
+.nav a {
+    text-decoration: none;
+}
+
+.active {
+    font-weight: 500;
+    color: #5E96FC;
+}
+
+.nonActive {
+    font-weight: 400;
+    color: #232134;
+}
