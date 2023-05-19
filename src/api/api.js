@@ -23,16 +23,17 @@ instance.interceptors.response.use((config) => {
     return config;
 }, async error => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && error.config && !error.config._isRetry) {
+    if (error.response.status === 410 && error.config && !error.config._isRetry) {
         originalRequest._isRetry = true;
         try {
-            alert('ПОПЫТКА К БЕГСТВИЮ!!!');
-            const response = await axios.get(`${API_URL}oauth2/refresh_token/?refresh_token=${localStorage.getItem('refresh_token')}&client_id=2356&client_secret=${ACCESS_TOKEN}`);
+            const response = await instance.get(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refresh_token')}&client_id=2356&client_secret=${ACCESS_TOKEN}`);
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
+            alert('check network (good)!')
             return instance.request(originalRequest);
         } catch (e) {
-            alert('НЕ АВТОРИЗОВАН!!!');
+            alert('check network (bad)!')
+            console.log(e);
         }
     }
     throw error;
@@ -41,10 +42,6 @@ instance.interceptors.response.use((config) => {
 export const authAPI = {
     async login() {
         const response = await instance.get(`oauth2/password/?login=sergei.stralenia@gmail.com&password=paralect123&client_id=2356&client_secret=${ACCESS_TOKEN}&hr=0`);
-        return response.data;
-    },
-    async refreshToken() {
-        const response = await axios.get(`${API_URL}oauth2/refresh_token/`);
         return response.data;
     },
 };
@@ -59,7 +56,15 @@ export const vacanciesAPI = {
         }
     },
     async getAllCatalogues() {
-        const response = await instance.get(`catalogues/`,);
+        const response = await instance.get(`catalogues/`);
+        if (response.status >= 200 && response.status <= 299) {
+            return response.data;
+        } else {
+            console.log('some error occured');
+        }
+    },
+    async getVacancy(vacancyId) {
+        const response = await instance.get(`vacancies/${vacancyId}`);
         if (response.status >= 200 && response.status <= 299) {
             return response.data;
         } else {

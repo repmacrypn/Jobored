@@ -4,6 +4,7 @@ import './App.css';
 import HeaderContainer from './components/header/HeaderContainer';
 import VacanciesContainer from './components/vacancies/VacanciesContainer';
 import FavouritesContainer from './components/favourites/FavouritesContainer';
+import VacancyContainer from './components/vacancies/Vacancy';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path='/' element={<Navigate to='/vacancies' />} />
           <Route path='/vacancies/*' element={<VacanciesContainer />} />
           <Route path='/favourites/*' element={<FavouritesContainer />} />
+          <Route path='/vacancy/:vacancyId' element={<VacancyContainer />} />
           <Route path='*' element={<div className='demoMessageAlert'>404 NOT FOUND</div>} />
         </Routes>
       </div>
