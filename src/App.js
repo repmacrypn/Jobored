@@ -5,6 +5,7 @@ import HeaderContainer from './components/header/HeaderContainer';
 import VacanciesContainer from './components/vacancies/VacanciesContainer';
 import FavouritesContainer from './components/favourites/FavouritesContainer';
 import VacancyContainer from './components/vacancies/Vacancy';
+import EmptyState from './components/common components/emptyState/EmptyState';
 
 function App() {
   return (

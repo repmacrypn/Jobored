@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import s from './EmptyState.module.css';
 import emptyState from '../../../resources/images/emptyState.png';
 import { connect } from "react-redux";
 import { getVacanciesOnFieldLoad } from '../../../redux/vacanciesReducer';
+import { Link } from "react-router-dom";
 
 const EmptyState = ({ getVacanciesOnFieldLoad }) => {
-    const onEmptyButtonClick = () => {
-        getVacanciesOnFieldLoad(4, 0);
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const onEmptyButtonClick = async () => {
+        setIsSubmitting(true);
+        await getVacanciesOnFieldLoad(4, 0);
+        setIsSubmitting(false);
     };
 
     return <div className={s.emptyWrapper}>
@@ -20,11 +25,12 @@ const EmptyState = ({ getVacanciesOnFieldLoad }) => {
         <div className={s.emptyTitle}>
             Упс, здесь еще ничего нет!
         </div>
-        <div
+        <button
+            disabled={isSubmitting}
             onClick={onEmptyButtonClick}
             className={s.emptyButton}>
-            Поиск Вакансий
-        </div>
+            <Link to='/vacancies/*'>Поиск Вакансий</Link>
+        </button>
     </div>
 };
 

@@ -30,19 +30,24 @@
     height: 42px;
 
     background: #DEECFF;
-    color: #3B7CD3;
 
     border-radius: 8px;
     border: none;
+
+    margin: 0 auto;
+    margin-bottom: 330px;
+}
+
+.emptyButton a {
+    text-decoration: none;
+
+    color: #3B7CD3;
 
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 22px;
-
-    margin: 0 auto;
-    margin-bottom: 330px;
 }
 
 .emptyButton:hover {
