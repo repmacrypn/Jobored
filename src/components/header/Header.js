@@ -8,22 +8,29 @@ const Header = () => {
             Jobored
         </div>
         <nav className={s.nav}>
-            <div className={s.vacancies}>
-                <NavLink
-                    className={({ isActive }) => `${isActive ? s.active : s.nonActive}`}
-                    to='/vacancies'>
-                    Поиск Вакансий
-                </NavLink>
-            </div>
-            <div className={s.fav}>
-                <NavLink
-                    className={({ isActive }) => `${isActive ? s.active : s.nonActive}`}
-                    to='/favourites'>
-                    Избранное
-                </NavLink>
-            </div>
+            <HeaderNavItem
+                className='vacancies'
+                text='Поиск Вакансий'
+                to='vacancies'
+            />
+            <HeaderNavItem
+                className='fav'
+                text='Избранное'
+                to='favourites'
+            />
         </nav>
     </header>;
 };
+
+const HeaderNavItem = ({ className, text, to }) => {
+    return <div className={s[className]}>
+        <NavLink
+            className={({ isActive }) => `${isActive ? s.active : s.nonActive}`}
+            to={`/${to}`}>
+            {text}
+        </NavLink>
+    </div>
+};
+
 
 export default Header;

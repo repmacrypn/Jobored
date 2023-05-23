@@ -1,43 +1,55 @@
-import React from "react";
-import Paginator from '../../utilites/Paginator';
-import starFavImage from '../../resources/images/StarFav.png';
-/* import s from './Favorites.module.css'; */
+import React, { useState } from "react";
+import Paginator from '../common components/paginator/Paginator';
+import s from './Favourites.module.css';
+import { FavStar, VacancyData } from "../vacancies/Vacancies";
+import { processSalaryFieldAccom } from "../../utilites/processSalary";
+import EmptyState from "../common components/emptyState/EmptyState";
 
-const Favourites = (props) => {
-    const onFavButtonClick = (fav) => {
-        props.modifyFavArray(fav, true);
-        props.modifyCurFavArray(fav);
-        props.setFavTotalCount(--props.favourites.length);
-    };
+const Favourites = ({ currentFavArray, favourites, modifyFavArray,
+    setFavTotalCount, totalCount, count, currentPage,
+    changeCurrentPageOnClick, portionSise }) => {
 
-    return <div>
-        <Paginator
-            totalItemsCount={props.totalCount}
-            pageSize={props.count}
-            currentPage={props.currentPage}
-            onPageChange={props.changeCurrentPageOnClick}
-            paginatorPortionNum={props.paginatorPortionNum}
-            setPaginatorPortionNum={props.setPaginatorPortionNum}
-        />
-        {
-            props.favourites.length ?
-                props.currentFavArray.map(obj => {
-                    return <div key={obj.id}>
-                        {obj.profession} - {obj.firm_name} - {obj.town?.title} - {obj.catalogues[0]?.title} - {obj.type_of_work?.title}
-                        - {obj.payment_to}:{obj.payment_from}/{obj.currency}
-                        <span onClick={() => onFavButtonClick(obj)}>
-                            <img
-                                height='22px'
-                                width='22px'
-                                alt='remove from favourites'
-                                src={starFavImage}
+    const [paginatorPortionNum, setPaginatorPortionNum] = useState(Math.ceil((currentPage + 1) / portionSise));
+
+    if (!favourites.length) {
+        return <EmptyState isButtonNeeded={true} />;
+    }
+
+    return (
+        <div className={s.contentFiled}>
+            <div>
+                {
+                    currentFavArray.map(obj => {
+                        return <div
+                            data-elem={`vacancy-${obj.id}`}
+                            className={s.vacancy}
+                            key={obj.id}
+                        >
+                            <VacancyData
+                                isDefault={true}
+                                obj={obj}
+                                processSalaryFieldAccom={processSalaryFieldAccom}
                             />
-                        </span>
-                    </div>
-                }) :
-                <div>Empty state</div >
-        }
-    </div >;
+                            <FavStar
+                                favourites={favourites}
+                                obj={obj}
+                                modifyFavArray={modifyFavArray}
+                                setFavTotalCount={setFavTotalCount}
+                            />
+                        </div>
+                    })
+                }
+            </div>
+            <Paginator
+                totalItemsCount={totalCount}
+                pageSize={count}
+                currentPage={currentPage}
+                onPageChange={changeCurrentPageOnClick}
+                paginatorPortionNum={paginatorPortionNum}
+                setPaginatorPortionNum={setPaginatorPortionNum}
+            />
+        </div >
+    );
 };
 
 export default Favourites;

@@ -5,7 +5,6 @@ export const ACCESS_TOKEN = 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a77
 export const SECRET_KEY = 'GEU4nvd3rej*jeh.eqp';
 
 const instance = axios.create({
-    /* withCredentials: true, */
     baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
@@ -15,7 +14,12 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+    const access = localStorage.getItem('access_token');
+
+    if (access) {
+        config.headers.Authorization = `Bearer ${access}`;
+    }
+
     return config;
 });
 
@@ -29,10 +33,8 @@ instance.interceptors.response.use((config) => {
             const response = await instance.get(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refresh_token')}&client_id=2356&client_secret=${ACCESS_TOKEN}`);
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
-            alert('check network (good)!')
             return instance.request(originalRequest);
         } catch (e) {
-            alert('check network (bad)!')
             console.log(e);
         }
     }
@@ -48,28 +50,18 @@ export const authAPI = {
 
 export const vacanciesAPI = {
     async getVacancies(count, page, catalogue, paymentFrom, paymentTo, searchKeyWord) {
-        const response = await instance.get(`vacancies/?no_agreement=1&count=${count}&page=${page}&published=1&keyword=${searchKeyWord}&payment_from=${paymentFrom}&payment_to=${paymentTo}&catalogues=${catalogue}`);
-        if (response.status >= 200 && response.status <= 299) {
-            return response.data;
-        } else {
-            console.log('some error occured');
-        }
+        let agreed = Number(!(paymentFrom === 0 && paymentTo === 0));
+
+        const response = await instance.get(`vacancies/?no_agreement=${agreed}&count=${count}&page=${page}&published=1&keyword=${searchKeyWord}&payment_from=${paymentFrom}&payment_to=${paymentTo}&catalogues=${catalogue}`);
+        return response.data;
     },
     async getAllCatalogues() {
         const response = await instance.get(`catalogues/`);
-        if (response.status >= 200 && response.status <= 299) {
-            return response.data;
-        } else {
-            console.log('some error occured');
-        }
+        return response.data;
     },
     async getVacancy(vacancyId) {
         const response = await instance.get(`vacancies/${vacancyId}`);
-        if (response.status >= 200 && response.status <= 299) {
-            return response.data;
-        } else {
-            console.log('some error occured');
-        }
+        return response.data;
     },
 };
 

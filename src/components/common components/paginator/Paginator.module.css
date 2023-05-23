@@ -1,0 +1,59 @@
+.paginator {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+
+    margin-bottom: 44px;
+}
+
+.chevLeft {
+    background: url('../../../resources/images/chevronLeft.png') no-repeat 7px 7px/16px 16px;
+}
+
+.chevLeft:disabled {
+    background: white url('../../../resources/images/chevronLeftDis.png') no-repeat 7px 7px/16px 16px;
+}
+
+.chevRight {
+    background: url('../../../resources/images/chevronRight.png') no-repeat 7px 7px/16px 16px;
+}
+
+.chevRight:disabled {
+    background: white url('../../../resources/images/chevronRightDis.png') no-repeat 7px 7px/16px 16px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #FFFFFF;
+
+    width: 32px;
+    height: 32px;
+
+    padding: 0;
+
+    border: 1px solid #EAEBED;
+    border-radius: 4px;
+
+    color: #232134;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.selectedButton {
+    border-color: #5E96FC;
+    background-color: #5E96FC;
+    color: white;
+}

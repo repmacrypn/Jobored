@@ -32,14 +32,4 @@ export const getLoginData = () => async (dispatch) => {
     }
 };
 
-export const chechIsAuth = () => async (dispatch) => {
-    try {
-        const data = await authAPI.refreshToken();
-        localStorage.setItem('token', data.access_token);
-        dispatch(toggleIsAuth(true));
-    } catch (e) {
-        console.log(e?.data?.message);
-    }
-};
-
 export default authReducer;

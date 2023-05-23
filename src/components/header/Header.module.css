@@ -1,8 +1,7 @@
 .header {
     display: flex;
-    justify-content: center;
+    gap: 25.09%;
     align-items: center;
-    width: 1440px;
     height: 84px;
     padding: 10px 162px;
 
@@ -17,34 +16,19 @@
     line-height: 36px;
     letter-spacing: -0.02em;
 
-    width: 99px;
-    height: 36px;
-
-    position: absolute;
-    left: 204px;
-    top: 24px;
+    padding-left: 38px;
 }
 
 .nav {
     display: flex;
     gap: 60px;
-    width: 275px;
+    max-width: 275px;
     height: 20px;
 
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-size: 16px;
     line-height: 20px;
-}
-
-.vacancies {
-    width: 129px;
-    height: 20px;
-}
-
-.fav {
-    width: 86px;
-    height: 20px;
 }
 
 .nav a {

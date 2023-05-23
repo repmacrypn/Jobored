@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import s from './EmptyState.module.css';
 import emptyState from '../../../resources/images/emptyState.png';
 import { connect } from "react-redux";
 import { getVacanciesOnFieldLoad } from '../../../redux/vacanciesReducer';
 import { Link } from "react-router-dom";
 
-const EmptyState = ({ getVacanciesOnFieldLoad }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false)
-
-    const onEmptyButtonClick = async () => {
-        setIsSubmitting(true);
-        await getVacanciesOnFieldLoad(4, 0);
-        setIsSubmitting(false);
-    };
-
+const EmptyState = ({ isButtonNeeded }) => {
     return <div className={s.emptyWrapper}>
         <img
             className={s.emptyState}
@@ -25,12 +17,12 @@ const EmptyState = ({ getVacanciesOnFieldLoad }) => {
         <div className={s.emptyTitle}>
             Упс, здесь еще ничего нет!
         </div>
-        <button
-            disabled={isSubmitting}
-            onClick={onEmptyButtonClick}
-            className={s.emptyButton}>
-            <Link to='/vacancies/*'>Поиск Вакансий</Link>
-        </button>
+        {
+            isButtonNeeded &&
+            <div className={s.emptyButton}>
+                <Link to='/vacancies/*'>Поиск Вакансий</Link>
+            </div>
+        }
     </div>
 };
 

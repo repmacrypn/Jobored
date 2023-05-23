@@ -1,42 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
     setFavourites, setCurrentPage,
-    modifyFavArray, setFavTotalCount,
-    modifyCurFavArray
+    modifyFavArray, setFavTotalCount
 } from '../../redux/favReducer';
 import Favourites from './Favourites';
 
-const FavouritesContainer = (props) => {
-    const [paginatorPortionNum, setPaginatorPortionNum] = useState(Math.ceil(props.currentPage === 0 ?
-        1 : props.currentPage / props.portionSise));
-
-    const favCopy = JSON.parse(JSON.stringify(props.favourites));
-
+const FavouritesContainer = ({ setFavourites, setCurrentPage,
+    favourites, count, currentPage, currentFavArray, modifyFavArray,
+    setFavTotalCount, totalCount, portionSise }) => {
     useEffect(() => {
-        props.setFavourites(favCopy.slice(props.currentPage * props.count, props.currentPage * props.count + 4));
-        return () => props.setCurrentPage(0);
-    }, []);
+        setFavourites(JSON.parse(JSON.stringify(favourites))
+            .slice(currentPage * count, currentPage * count + 4));
+    }, [setFavourites]);
 
     const changeCurrentPageOnClick = (pageNumber) => {
-        props.setCurrentPage(pageNumber);
-        props.setFavourites(favCopy.slice(pageNumber * props.count, pageNumber * props.count + 4));
+        setCurrentPage(pageNumber);
+        setFavourites(JSON.parse(JSON.stringify(favourites))
+            .slice(pageNumber * count, pageNumber * count + 4));
     };
 
     return <Favourites
-        paginatorPortionNum={paginatorPortionNum}
-        setPaginatorPortionNum={setPaginatorPortionNum}
-        favourites={props.favourites}
-        currentFavArray={props.currentFavArray}
-        count={props.count}
-        currentPage={props.currentPage}
-        setFavourites={props.setFavourites}
-        setCurrentPage={props.setCurrentPage}
+        favourites={favourites}
+        currentFavArray={currentFavArray}
+        count={count}
+        currentPage={currentPage}
         changeCurrentPageOnClick={changeCurrentPageOnClick}
-        modifyFavArray={props.modifyFavArray}
-        modifyCurFavArray={props.modifyCurFavArray}
-        setFavTotalCount={props.setFavTotalCount}
-        totalCount={props.totalCount}
+        modifyFavArray={modifyFavArray}
+        setFavTotalCount={setFavTotalCount}
+        totalCount={totalCount}
+        portionSise={portionSise}
     />
 };
 
@@ -52,6 +45,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-    setFavourites, modifyCurFavArray,
-    setCurrentPage, setFavTotalCount, modifyFavArray
+    setFavourites, setCurrentPage, setFavTotalCount, modifyFavArray
 })(FavouritesContainer);
