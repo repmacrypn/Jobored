@@ -1,3 +1,8 @@
+.headerWrapper {
+    width: max-content;
+    background-color: white;
+}
+
 .header {
     display: flex;
     gap: 25.09%;
@@ -22,7 +27,6 @@
 .nav {
     display: flex;
     gap: 60px;
-    max-width: 275px;
     height: 20px;
 
     font-family: 'Inter', sans-serif;
