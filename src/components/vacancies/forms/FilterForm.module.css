@@ -1,0 +1,108 @@
+.filterField {
+    grid-area: filterField;
+    background-color: #FFFFFF;
+    border: 1px solid #EAEBED;
+    border-radius: 12px;
+    padding: 20px;
+    width: 315px;
+    max-height: 360px;
+    margin-top: 40px;
+}
+
+.filterFormField {
+    width: 275px;
+    max-height: 320px;
+    padding: 0px;
+    position: relative;
+}
+
+.resetAllField {
+    position: absolute;
+    left: 163px;
+    top: 0;
+
+    padding-right: 17px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ACADB9;
+
+    background: url('../../../resources/images/resetDefault.jpg') no-repeat 97px 2.5px/16px 16px;
+}
+
+.resetAllField:hover {
+    cursor: pointer;
+    color: #92C1FF;
+    background: url('../../../resources/images/resetHover.png') no-repeat 97px 2.5px/16px 16px;
+}
+
+.resetAllField:active {
+    cursor: pointer;
+    color: #5E96FC;
+    background: url('../../../resources/images/resetPressed.png') no-repeat 97px 2.5px/16px 16px;
+}
+
+.resetAllField img {
+    display: inline-block;
+    margin-bottom: 1px;
+}
+
+.factoryLabel {
+    margin-top: 32px;
+    padding-bottom: 8px;
+}
+
+.salaryLabel {
+    padding-bottom: 8px;
+}
+
+.searchField {
+    position: absolute;
+    top: 124px;
+    left: 505px;
+}
+
+.defaultButtonStyles {
+    padding: 4px 20px;
+
+    text-align: center;
+
+    background-color: #5E96FC;
+    color: #FFFFFF;
+
+    border-radius: 8px;
+    border: none;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.defaultButtonStyles:hover {
+    background-color: #92C1FF;
+    cursor: pointer;
+}
+
+.defaultButtonStyles:active {
+    background-color: #3B7CD3;
+    cursor: pointer;
+}
+
+.submitButton {
+    margin-top: 20px;
+
+    display: block;
+
+    width: 275px;
+    height: 40px;
+}
+
+.searchButton {
+    display: inline-block;
+
+    width: 83px;
+    height: 32px;
+}

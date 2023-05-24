@@ -9,6 +9,7 @@ const SET_ALL_CATALOGUES = 'vacancies/SET_ALL_CATALOGUES';
 const SET_PAYMENT_FROM = 'vacancies/SET_PAYMENT_FROM';
 const SET_PAYMENT_TO = 'vacancies/SET_PAYMENT_TO';
 const SET_KEYWORD = 'vacancies/SET_KEYWORD';
+const SET_VACANCY = 'vacancies/SET_VACANCY';
 
 const initialState = {
     vacancies: [],
@@ -22,6 +23,7 @@ const initialState = {
     paymentFrom: '',
     paymentTo: '',
     keyWord: '',
+    vacancy: {},
 };
 
 const vacanciesReducer = (state = initialState, action) => {
@@ -31,6 +33,13 @@ const vacanciesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 vacancies: [...action.vacancies],
+            };
+        }
+
+        case SET_VACANCY: {
+            return {
+                ...state,
+                vacancy: action.vacancy,
             };
         }
 
@@ -101,42 +110,61 @@ const setVacancies = (vacancies) => ({ type: SET_VACANCIES, vacancies, });
 const setPreloader = (isFetching) => ({ type: SET_PRELOADER, isFetching, });
 const setTotalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount, });
 const setAllCatalogues = (allCatalogues) => ({ type: SET_ALL_CATALOGUES, allCatalogues, });
+const setVacancy = (vacancy) => ({ type: SET_VACANCY, vacancy, });
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
 export const setCatalogue = (catalogue) => ({ type: SET_CATALOGUE, catalogue, });
 export const setPaymentFrom = (paymentFrom) => ({ type: SET_PAYMENT_FROM, paymentFrom, });
 export const setPaymentTo = (paymentTo) => ({ type: SET_PAYMENT_TO, paymentTo, });
 export const setKeyWord = (keyWord) => ({ type: SET_KEYWORD, keyWord, });
 
-export const getVacanciesOnFieldLoad = (count, currentPage, catalogue = '', paymentFrom = '',
-    paymentTo = '', /* setSubmitting = '', */ searchKeyWord = '') => async (dispatch) => {
-        dispatch(setPreloader(true));
+const getVacancies = async (count, currentPage, catalogue, paymentFrom,
+    paymentTo, searchKeyWord, dispatch, isTotalNeeded = false) => {
+    dispatch(setPreloader(true));
 
-        const data = await vacanciesAPI.getVacancies(count, currentPage,
-            catalogue, paymentFrom, paymentTo, searchKeyWord);
+    const data = await vacanciesAPI.getVacancies(count, currentPage,
+        catalogue, paymentFrom, paymentTo, searchKeyWord);
+
+    dispatch(setVacancies(data.objects));
+    if (isTotalNeeded) {
         dispatch(setTotalCount(data.total));
-        dispatch(setVacancies(data.objects));
+    }
+    dispatch(setPreloader(false));
+};
+
+export const getVacanciesOnFieldLoad = (count, currentPage, catalogue = '', paymentFrom = '',
+    paymentTo = '', searchKeyWord = '') => async (dispatch) => {
+
+        getVacancies(count, currentPage, catalogue, paymentFrom,
+            paymentTo, searchKeyWord, dispatch, true);
+
         dispatch(setCatalogue(catalogue));
         dispatch(setPaymentFrom(paymentFrom));
         dispatch(setPaymentTo(paymentTo));
         dispatch(setKeyWord(searchKeyWord));
-        dispatch(setPreloader(false));
     };
 
 export const getVacanciesOnFieldChange = (count, pageNumber, catalogue = '',
     paymentFrom = '', paymentTo = '', searchKeyWord = '') => async (dispatch) => {
-        dispatch(setPreloader(true));
-        dispatch(setCurrentPage(pageNumber));
 
-        const data = await vacanciesAPI.getVacancies(count, pageNumber,
-            catalogue, paymentFrom, paymentTo, searchKeyWord);
-        dispatch(setVacancies(data.objects));
-        dispatch(setPreloader(false));
+        getVacancies(count, pageNumber, catalogue, paymentFrom,
+            paymentTo, searchKeyWord, dispatch);
+
+        dispatch(setCurrentPage(pageNumber));
     };
 
 export const getAllCatalogues = () => async (dispatch) => {
     const data = await vacanciesAPI.getAllCatalogues();
 
     dispatch(setAllCatalogues(data));
+};
+
+export const getVacancy = (vacancyId) => async (dispatch) => {
+    dispatch(setPreloader(true));
+
+    const data = await vacanciesAPI.getVacancy(vacancyId);
+
+    dispatch(setVacancy(data));
+    dispatch(setPreloader(false));
 };
 
 export default vacanciesReducer;

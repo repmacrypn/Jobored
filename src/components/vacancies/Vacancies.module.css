@@ -1,22 +1,181 @@
-.vacanciesMainField {
+.vacanciesWrapperField {
     display: grid;
     grid-template-columns: 162px 315px 773px;
     grid-template-areas: '. filterField searchField';
 }
 
-.filterField {
-    grid-area: filterField;
-    background-color: #FFFFFF;
-    border: 1px solid #EAEBED;
-    border-radius: 12px;
-    padding: 20px;
-    width: 315px;
-    height: 360px;
-    margin-top: 40px;
-}
-
 .contentField {
     grid-area: searchField;
+
     margin-left: 28px;
     margin-top: 104px;
+
+    width: 773px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+
+    position: relative;
+}
+
+.vacancy {
+    background-color: #FFFFFF;
+
+    border: 1px solid #EAEBED;
+    border-radius: 12px;
+
+    position: relative;
+
+    width: 773px;
+    min-height: 137px;
+
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.curVac {
+    margin: 40px auto 0 auto;
+}
+
+.profession {
+    margin-bottom: 12.5px;
+    max-width: 690px;
+    overflow: hidden;
+}
+
+.profession a {
+    text-decoration: none;
+    color: #5E96FC;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.workConditField {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.salary {
+    margin-bottom: 13px;
+}
+
+.salaryDefaultFont {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: #232134;
+}
+
+.point {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+
+    color: #7B7C88;
+}
+
+.typeOfWork {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: #232134;
+}
+
+.typeOfWorkNotDef {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+
+    color: #232134;
+}
+
+.town {
+    padding-left: 22px;
+
+    background: url('../../resources/images/location.png') no-repeat 0px 2px/16px 16px;
+}
+
+.townDefaultFont {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #232134;
+}
+
+.favStar {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 22px;
+    height: 22px;
+}
+
+.fav {
+    background: url('../../resources/images/StarFav.png') no-repeat 0px 0px/22px 22px;
+}
+
+.notFav {
+    background: url('../../resources/images/StarNotFav.png') no-repeat 0px 0px/22px 22px;
+}
+
+.favStar:hover {
+    background: url('../../resources/images/StarOnHover.png') no-repeat 0px 0px/22px 22px;
+    cursor: pointer;
+}
+
+.pageWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.vacancyPageWrapper {
+    color: #232134;
+    font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+
+    width: 773px;
+    background-color: white;
+
+    padding: 24px;
+    margin: 20px auto 51px auto;
+
+    border: 1px solid #EAEBED;
+    border-radius: 12px;
+}
+
+.vacancyPageWrapper h1,
+h2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.vacancyPageWrapper p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
 }

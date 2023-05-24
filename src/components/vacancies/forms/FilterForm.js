@@ -5,40 +5,40 @@ import dropDown from '../../../resources/images/dropDown.png';
 import dropDownOnFocus from '../../../resources/images/dropDownOnFocus.png';
 import { Input, Select, NumberInput } from '@mantine/core';
 import { Search } from 'tabler-icons-react';
+import { ms } from '../../../styles/mantineStyles';
 
-const FilterForm = ({ count, getVacancies, setCurrentPage,
-    setPaymentFrom, setPaymentTo, setCatalogue, setKeyWord,
-    setPaginatorPortionNum, allCatalogues }) => {
-    const [fromNum, setFromNum] = useState('');
-    const [toNum, setToNum] = useState('');
-    const [selectValue, setSelectValue] = useState('');
-    const [searchValue, setSearchValue] = useState('');
+const FilterForm = React.memo(({ count, getVacancies, setCurrentPage,
+    setPaginatorPortionNum, allCatalogues, paymentFrom,
+    paymentTo, keyWord, catalogue }) => {
+
+    const [fromNum, setFromNum] = useState(paymentFrom);
+    const [toNum, setToNum] = useState(paymentTo);
+    const [selectValue, setSelectValue] = useState(catalogue);
+    const [searchValue, setSearchValue] = useState(keyWord);
     const [focused, setFocused] = useState(false);
 
-    const onSubmitButtonClick = (e) => {
+    const callDefaultSubmitAction = (e) => {
         e.preventDefault();
         setPaginatorPortionNum(1);
         setCurrentPage(0);
+    };
+
+    const onSubmitButtonClick = (e) => {
+        callDefaultSubmitAction(e);
         getVacancies(count, 0, selectValue, fromNum, toNum, searchValue);
     };
 
     const resetAllOnClick = (e) => {
-        e.preventDefault();
-        setPaginatorPortionNum(1);
-        setCurrentPage(0);
-        setPaymentFrom('');
+        callDefaultSubmitAction(e);
         setFromNum('');
-        setPaymentTo('');
         setToNum('');
-        setCatalogue('');
         setSelectValue('');
-        setKeyWord('');
         setSearchValue('');
-        getVacancies(count, 0, '', '', '', '');
+        getVacancies(count, 0);
     };
 
     return (
-        <>
+        <div className={s.filterField}>
             <form className={s.filterFormField}>
                 <div className='titleSBold'>
                     Фильтры
@@ -46,10 +46,12 @@ const FilterForm = ({ count, getVacancies, setCurrentPage,
                 <div onClick={resetAllOnClick} className={`${s.resetAllField}`}>
                     Сбросить все
                 </div>
-                <div className={`${s.factoryLabel} textBaseMBold`}>
-                    Отрасль
-                </div>
+                <Title
+                    text='Отрасль'
+                    className='factoryLabel'
+                />
                 <Select
+                    data-elem='industry-select'
                     value={selectValue}
                     onChange={setSelectValue}
                     maxDropdownHeight={188}
@@ -58,104 +60,115 @@ const FilterForm = ({ count, getVacancies, setCurrentPage,
                     radius="md"
                     rightSectionWidth={40}
                     rightSection={focused ?
-                        <img
+                        <RightSectionImage
                             src={dropDownOnFocus}
                             alt='dropDownOnFocus'
-                            width='24px'
-                            height='24px'
                         /> :
-                        <img
+                        <RightSectionImage
                             src={dropDown}
                             alt='dropDown'
-                            width='24px'
-                            height='24px'
                         />
                     }
                     onDropdownClose={() => setFocused(false)}
                     onDropdownOpen={() => setFocused(true)}
                     styles={{
-                        input: {
-                            width: 275,
-                            height: 42,
-
-                            marginBottom: 20,
-                            padding: '8px 12px',
-
-                            borderColor: '#D5D6DC',
-                            color: '#232134',
-                            font: 'normal 400 14px/20px Inter, sans-serif',
-                            '&:hover': {
-                                borderColor: '#5E96FC',
-                            },
-                        },
-                        dropdown: {
-                            border: 'none',
-                            borderRadius: 8,
-
-                            width: 275,
-                            height: 188,
-
-                            padding: 4,
-                        },
-                        item: {
-                            width: 267,
-                            height: 36,
-
-                            padding: 8,
-
-                            borderRadius: 8,
-                            font: 'normal 400 14px/20px Inter, sans-serif',
-                            color: '#232134',
-                            '&[data-hovered]': {
-                                backgroundColor: "#DEECFF",
-                                padding: '8px 12px',
-                            },
-                            '&[data-selected]': {
-                                backgroundColor: "#5E96FC",
-                                color: "white",
-                                padding: '8px 12px',
-                                font: 'normal 500 14px/20px Inter, sans-serif',
-                            },
-                        },
-                        rightSection: { pointerEvents: 'none' }
+                        input: ms.select.input,
+                        dropdown: ms.select.dropdown,
+                        item: ms.select.item,
+                        rightSection: ms.select.rightSection,
                     }}
                 />
-                <NumberInput
+                <Title
+                    text='Оклад'
+                    className='salaryLabel'
+                />
+                <CustomNumberInput
+                    dataElem='salary-from-input'
                     value={fromNum}
-                    onChange={(value) => setFromNum(+value)}
+                    setNum={setFromNum}
                     placeholder="От"
-                    radius="md"
-                    step={500}
-                    min={0}
-                    stepHoldDelay={500}
-                    stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
                 />
-                <NumberInput
+                <CustomNumberInput
+                    dataElem='salary-to-input'
                     value={toNum}
-                    onChange={(value) => setToNum(+value)}
+                    setNum={setToNum}
                     placeholder="До"
-                    radius="md"
-                    step={500}
-                    min={fromNum}
-                    stepHoldDelay={500}
-                    stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
                 />
-                <div>
-                    <button onClick={onSubmitButtonClick}>Применить</button>
-                </div>
+                <SubmitButton
+                    onSubmitButtonClick={onSubmitButtonClick}
+                    text='Применить'
+                    className='submitButton'
+                />
             </form>
             <form className={s.searchField}>
                 <Input
+                    data-elem='search-input'
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
-                    icon={<Search />}
+                    icon={<Search size={16} />}
+                    iconWidth={30}
                     placeholder="Введите название вакансии"
                     radius="md"
-                    rightSection={<button onClick={onSubmitButtonClick}>Поиск</button>}
+                    rightSectionWidth={107}
+                    rightSection={
+                        <SubmitButton
+                            onSubmitButtonClick={onSubmitButtonClick}
+                            text='Поиск'
+                            className='searchButton'
+                        />
+                    }
+                    styles={{
+                        input: ms.textInput.input,
+                    }}
                 />
             </form>
-        </>
+        </div>
     );
+});
+
+const RightSectionImage = ({ src, alt }) => {
+    return <img
+        src={src}
+        alt={alt}
+        width='24px'
+        height='24px'
+    />;
 };
+
+const CustomNumberInput = ({ value, placeholder, setNum, dataElem }) => {
+    return <NumberInput
+        data-elem={dataElem}
+        value={value}
+        onChange={(value) => setNum(+value)}
+        placeholder={placeholder}
+        radius="md"
+        rightSectionWidth={35}
+        step={500}
+        min={0}
+        stepHoldDelay={500}
+        stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
+        styles={{
+            input: ms.numberInput.input,
+            control: ms.numberInput.control,
+            controlUp: ms.numberInput.controlUp,
+            controlDown: ms.numberInput.controlDown,
+        }}
+    />
+};
+
+const SubmitButton = ({ text, className, onSubmitButtonClick }) => {
+    return <button
+        data-elem='search-button'
+        className={`${s[className]} ${s.defaultButtonStyles}`}
+        onClick={onSubmitButtonClick}>
+        {text}
+    </button>
+};
+
+const Title = ({ text, className }) => {
+    return <div className={`${s[className]} textBaseMBold`}>
+        {text}
+    </div>
+}
 
 export default FilterForm;
