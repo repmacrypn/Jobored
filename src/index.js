@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter, HashRouter } from 'react-router-dom';
 import store, { persistor } from './redux/store';
 import { Provider } from 'react-redux';
 import { MantineProvider } from '@mantine/core';
@@ -13,13 +13,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <MantineProvider withGlobalStyles withNormalizeCSS>
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
           <App store={store} />
         </PersistGate>
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </MantineProvider>
 );
 
