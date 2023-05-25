@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Jobored/static/css/main.3ae32c1b.css",
-    "main.js": "/Jobored/static/js/main.868c23e1.js",
+    "main.css": "/Jobored/static/css/main.26174d00.css",
+    "main.js": "/Jobored/static/js/main.c8f0ae0a.js",
     "static/js/787.28cb0dcd.chunk.js": "/Jobored/static/js/787.28cb0dcd.chunk.js",
     "static/media/emptyState.png": "/Jobored/static/media/emptyState.c982cca6fc34b1b92491.png",
     "static/media/preloader.svg": "/Jobored/static/media/preloader.85b3c1806e8fcaea6fec69ebf5a41da0.svg",
     "index.html": "/Jobored/index.html",
-    "main.3ae32c1b.css.map": "/Jobored/static/css/main.3ae32c1b.css.map",
-    "main.868c23e1.js.map": "/Jobored/static/js/main.868c23e1.js.map",
+    "main.26174d00.css.map": "/Jobored/static/css/main.26174d00.css.map",
+    "main.c8f0ae0a.js.map": "/Jobored/static/js/main.c8f0ae0a.js.map",
     "787.28cb0dcd.chunk.js.map": "/Jobored/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3ae32c1b.css",
-    "static/js/main.868c23e1.js"
+    "static/css/main.26174d00.css",
+    "static/js/main.c8f0ae0a.js"
   ]
 }
