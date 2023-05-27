@@ -1,23 +1,25 @@
 .vacanciesWrapperField {
-    display: grid;
-    grid-template-columns: 162px 315px 773px;
-    grid-template-areas: '. filterField searchField';
+    background-color: #F7F7F8;
+    display: flex;
+    gap: 28px;
+
+    max-width: 1116px;
+    margin: 0 auto;
 }
 
+
+
 .contentField {
-    grid-area: searchField;
-
-    margin-left: 28px;
-    margin-top: 104px;
-
-    width: 773px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 24px;
 
+    width: 69.265%;
+    max-width: 773px;
+
     position: relative;
+    top: 104px;
 }
 
 .vacancy {
@@ -28,7 +30,8 @@
 
     position: relative;
 
-    width: 773px;
+    width: 100%;
+    max-width: 773px;
     min-height: 137px;
 
     padding: 24px;
@@ -41,6 +44,7 @@
 
 .profession {
     margin-bottom: 12.5px;
+    width: 95%;
     max-width: 690px;
     overflow: hidden;
 }
@@ -157,7 +161,8 @@
     font-size: 16px;
     line-height: 140%;
 
-    width: 773px;
+    width: 100%;
+    max-width: 773px;
     background-color: white;
 
     padding: 24px;
@@ -178,4 +183,37 @@ h2 {
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
+}
+
+@media (max-width: 1130px) and (min-width: 320px) {
+    .vacanciesWrapperField {
+        max-width: 813px;
+        width: 95%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contentField {
+        width: 100%;
+    }
+
+    .vacancyPageWrapper,
+    .curVac {
+        max-width: 813px;
+        width: 95%;
+    }
+}
+
+@media (max-width: 580px) and (min-width: 320px) {
+    .profession {
+        font-size: 22px;
+    }
+
+    .salary {
+        font-size: 18px;
+    }
+
+    .typeOfWorkNotDef {
+        font-size: 18px;
+    }
 }

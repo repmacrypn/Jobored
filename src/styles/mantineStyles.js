@@ -1,7 +1,7 @@
 export const ms = {
     select: {
         input: {
-            width: 275,
+            width: '100%',
             height: 42,
 
             marginBottom: 20,
@@ -18,13 +18,13 @@ export const ms = {
             border: 'none',
             borderRadius: 8,
 
-            width: 275,
+            width: '100%',
             height: 188,
 
             padding: 4,
         },
         item: {
-            width: 267,
+            width: '97%',
             height: 36,
 
             padding: 8,
@@ -47,7 +47,7 @@ export const ms = {
     },
     numberInput: {
         input: {
-            width: 275,
+            width: '100%',
             height: 42,
 
             marginBottom: 8,
@@ -92,6 +92,9 @@ export const ms = {
             '&:hover': {
                 borderColor: '#5E96FC',
             },
-        }
+            [`@media (max-width: 1130px) and (min-width: 320px)`]: {
+                width: '100%',
+            },
+        },
     }
 };

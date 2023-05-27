@@ -16,6 +16,7 @@ const FilterForm = React.memo(({ count, getVacancies, setCurrentPage,
     const [selectValue, setSelectValue] = useState(catalogue);
     const [searchValue, setSearchValue] = useState(keyWord);
     const [focused, setFocused] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     const callDefaultSubmitAction = (e) => {
         e.preventDefault();
@@ -43,62 +44,68 @@ const FilterForm = React.memo(({ count, getVacancies, setCurrentPage,
                 <div className='titleSBold'>
                     Фильтры
                 </div>
-                <div onClick={resetAllOnClick} className={`${s.resetAllField}`}>
-                    Сбросить все
+                <div className={`${s[`filterFormProps${isVisible}`]}`}>
+                    <div onClick={resetAllOnClick} className={s.resetAllField}>
+                        Сбросить все
+                    </div>
+                    <Title
+                        text='Отрасль'
+                        className='factoryLabel'
+                    />
+                    <Select
+                        data-elem='industry-select'
+                        value={selectValue}
+                        onChange={setSelectValue}
+                        maxDropdownHeight={188}
+                        data={allCatalogues.map(optObj => ({ value: optObj.key, label: optObj.title_trimmed }))}
+                        placeholder="Выберите отрасль"
+                        radius="md"
+                        rightSectionWidth={40}
+                        rightSection={focused ?
+                            <RightSectionImage
+                                src={dropDownOnFocus}
+                                alt='dropDownOnFocus'
+                            /> :
+                            <RightSectionImage
+                                src={dropDown}
+                                alt='dropDown'
+                            />
+                        }
+                        onDropdownClose={() => setFocused(false)}
+                        onDropdownOpen={() => setFocused(true)}
+                        styles={{
+                            input: ms.select.input,
+                            dropdown: ms.select.dropdown,
+                            item: ms.select.item,
+                            rightSection: ms.select.rightSection,
+                        }}
+                    />
+                    <Title
+                        text='Оклад'
+                        className='salaryLabel'
+                    />
+                    <CustomNumberInput
+                        dataElem='salary-from-input'
+                        value={fromNum}
+                        setNum={setFromNum}
+                        placeholder="От"
+                    />
+                    <CustomNumberInput
+                        dataElem='salary-to-input'
+                        value={toNum}
+                        setNum={setToNum}
+                        placeholder="До"
+                    />
+                    <SubmitButton
+                        onSubmitButtonClick={onSubmitButtonClick}
+                        text='Применить'
+                        className='submitButton'
+                    />
                 </div>
-                <Title
-                    text='Отрасль'
-                    className='factoryLabel'
-                />
-                <Select
-                    data-elem='industry-select'
-                    value={selectValue}
-                    onChange={setSelectValue}
-                    maxDropdownHeight={188}
-                    data={allCatalogues.map(optObj => ({ value: optObj.key, label: optObj.title_trimmed }))}
-                    placeholder="Выберите отрасль"
-                    radius="md"
-                    rightSectionWidth={40}
-                    rightSection={focused ?
-                        <RightSectionImage
-                            src={dropDownOnFocus}
-                            alt='dropDownOnFocus'
-                        /> :
-                        <RightSectionImage
-                            src={dropDown}
-                            alt='dropDown'
-                        />
-                    }
-                    onDropdownClose={() => setFocused(false)}
-                    onDropdownOpen={() => setFocused(true)}
-                    styles={{
-                        input: ms.select.input,
-                        dropdown: ms.select.dropdown,
-                        item: ms.select.item,
-                        rightSection: ms.select.rightSection,
-                    }}
-                />
-                <Title
-                    text='Оклад'
-                    className='salaryLabel'
-                />
-                <CustomNumberInput
-                    dataElem='salary-from-input'
-                    value={fromNum}
-                    setNum={setFromNum}
-                    placeholder="От"
-                />
-                <CustomNumberInput
-                    dataElem='salary-to-input'
-                    value={toNum}
-                    setNum={setToNum}
-                    placeholder="До"
-                />
-                <SubmitButton
-                    onSubmitButtonClick={onSubmitButtonClick}
-                    text='Применить'
-                    className='submitButton'
-                />
+                <div
+                    onClick={() => setIsVisible(!isVisible)}
+                    className={`${s[`filterDropDown${isVisible}`]} ${s.fdd}`}>
+                </div>
             </form>
             <form className={s.searchField}>
                 <Input

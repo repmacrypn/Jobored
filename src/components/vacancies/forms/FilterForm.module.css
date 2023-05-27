@@ -1,12 +1,23 @@
 .filterField {
-    grid-area: filterField;
     background-color: #FFFFFF;
     border: 1px solid #EAEBED;
     border-radius: 12px;
     padding: 20px;
-    width: 315px;
+    max-width: 315px;
     max-height: 360px;
-    margin-top: 40px;
+
+    position: relative;
+    top: 40px;
+}
+
+.filterDropDown {
+    display: none;
+}
+
+.searchField {
+    position: absolute;
+    left: 342px;
+    bottom: 310px;
 }
 
 .filterFormField {
@@ -18,7 +29,7 @@
 
 .resetAllField {
     position: absolute;
-    left: 163px;
+    right: 0;
     top: 0;
 
     padding-right: 17px;
@@ -55,12 +66,6 @@
 
 .salaryLabel {
     padding-bottom: 8px;
-}
-
-.searchField {
-    position: absolute;
-    top: 124px;
-    left: 505px;
 }
 
 .defaultButtonStyles {
@@ -105,4 +110,106 @@
 
     width: 83px;
     height: 32px;
+}
+
+@media (max-width: 1130px) and (min-width: 320px) {
+    .filterField {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 20px 0;
+
+        width: 100%;
+        max-width: 773px;
+    }
+
+    .filterFormField {
+        width: 80%;
+    }
+
+    .searchField {
+        position: static;
+        margin-top: 40px;
+
+        max-width: 773px;
+        width: 100%;
+    }
+
+    .factoryLabel,
+    .salaryLabel {
+        text-align: center;
+    }
+
+    .submitButton {
+        margin-left: auto;
+        margin-right: auto;
+        width: 330px;
+    }
+}
+
+@media (max-width: 544px) and (min-width: 320px) {
+
+    .filterFormPropsfalse {
+        display: none;
+    }
+
+    .filterFormPropstrue {
+        visibility: visible;
+    }
+
+    .resetAllField {
+        top: 1px;
+        right: 30px;
+    }
+
+    .fdd {
+        display: block;
+        position: absolute;
+        right: -15px;
+        top: -5px;
+        width: 30px;
+        height: 30px;
+
+        background: no-repeat 0 0/30px 30px;
+    }
+
+    .fdd {
+        cursor: pointer;
+    }
+
+    .filterDropDownfalse {
+        background-image: url('../../../resources/images/fdd.png');
+    }
+
+    .filterDropDowntrue {
+        background-image: url('../../../resources/images/fddActive.png');
+    }
+
+    .filterDropDownfalse:hover {
+        background-image: url('../../../resources/images/fddOnHoverF.png');
+    }
+
+    .filterDropDowntrue:hover {
+        background-image: url('../../../resources/images/fddOnHoverT.png');
+    }
+
+    .searchField {
+        position: absolute;
+        left: 0;
+        bottom: -70px;
+    }
+}
+
+@media (max-width: 440px) and (min-width: 320px) {
+    .submitButton {
+        width: 180px;
+    }
+
+    .searchButton {
+        width: 60px;
+        padding: 0;
+        margin-left: 20px;
+    }
 }

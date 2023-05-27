@@ -19,19 +19,28 @@ const Header = () => {
                     text='Избранное'
                     to='favourites'
                 />
+                <HeaderNavItem
+                    className='vacanciesIcon'
+                    text=' '
+                    to='vacancies'
+                />
+                <HeaderNavItem
+                    className='favIcon'
+                    text=''
+                    to='favourites'
+                />
             </nav>
         </div>
     </header>;
 };
 
 const HeaderNavItem = ({ className, text, to }) => {
-    return <div className={s[className]}>
-        <NavLink
-            className={({ isActive }) => `${isActive ? s.active : s.nonActive}`}
-            to={`/${to}`}>
-            {text}
-        </NavLink>
-    </div>
+    return <NavLink
+        className={({ isActive }) =>
+            `${isActive ? s.active : s.nonActive}`}
+        to={`/${to}`}>
+        <div className={s[className]}>{text}</div>
+    </NavLink>
 };
 
 

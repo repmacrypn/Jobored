@@ -9,9 +9,9 @@ import PageNotFound from './components/common components/404/PageNotFound';
 
 function App() {
   return (
-    <div>
+    <>
       <HeaderContainer />
-      <div className='main'>
+      <div className='appWrapper'>
         <Routes>
           <Route path='/' element={<Navigate to='/vacancies' />} />
           <Route path='/vacancies/*' element={<VacanciesContainer />} />
@@ -20,7 +20,7 @@ function App() {
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </div>
-    </div>
+    </>
   );
 }
 
