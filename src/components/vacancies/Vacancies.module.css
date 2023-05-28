@@ -132,18 +132,20 @@
     right: 25px;
     width: 22px;
     height: 22px;
+
+    background: no-repeat 0px 0px/22px 22px;
 }
 
 .fav {
-    background: url('../../resources/images/StarFav.png') no-repeat 0px 0px/22px 22px;
+    background-image: url('../../resources/images/StarFav.png');
 }
 
 .notFav {
-    background: url('../../resources/images/StarNotFav.png') no-repeat 0px 0px/22px 22px;
+    background-image: url('../../resources/images/StarNotFav.png');
 }
 
 .favStar:hover {
-    background: url('../../resources/images/StarOnHover.png') no-repeat 0px 0px/22px 22px;
+    background-image: url('../../resources/images/StarOnHover.png');
     cursor: pointer;
 }
 

@@ -74,7 +74,7 @@
 
 @media (max-width: 485px) and (min-width: 320px) {
     .nav {
-        max-width: 275px;
+        width: 200px;
         left: 32.72%;
     }
 
