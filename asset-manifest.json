@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Jobored/static/css/main.4bcfad1a.css",
+    "main.css": "/Jobored/static/css/main.88cb8055.css",
     "main.js": "/Jobored/static/js/main.18fa7da7.js",
     "static/js/787.28cb0dcd.chunk.js": "/Jobored/static/js/787.28cb0dcd.chunk.js",
     "static/media/emptyState.png": "/Jobored/static/media/emptyState.c982cca6fc34b1b92491.png",
     "static/media/preloader.svg": "/Jobored/static/media/preloader.85b3c1806e8fcaea6fec69ebf5a41da0.svg",
     "index.html": "/Jobored/index.html",
-    "main.4bcfad1a.css.map": "/Jobored/static/css/main.4bcfad1a.css.map",
+    "main.88cb8055.css.map": "/Jobored/static/css/main.88cb8055.css.map",
     "main.18fa7da7.js.map": "/Jobored/static/js/main.18fa7da7.js.map",
     "787.28cb0dcd.chunk.js.map": "/Jobored/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4bcfad1a.css",
+    "static/css/main.88cb8055.css",
     "static/js/main.18fa7da7.js"
   ]
 }
