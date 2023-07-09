@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# About the application
+## Jobored
+Jobored application contains several pages including vacancies search, favourites page
+and full vacancy information page.This app is a simple prototype of Rabota.by website
+ with its own distinctive features. Hope you'll enjoy the usage!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Application benifits a.k. why this app? :sunglasses:**
 
-## Available Scripts
++ an easy way to find out if there is a job that suits you well
++ an opportunity to add and delete vacancies to/from the favourites list
++ the ability to get access of full info about the chosen job
 
-In the project directory, you can run:
+Speaking about the app, there are some pages and each of them is responsible for its logic. 
+___
+## *Login: :sweat_smile:
+   - Login occurs automatically by hardcoding data and setting server response into the state
 
-### `npm start`
+## Vacancies page features :astonished:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Use filter form to receive the vacancies on button click
+2. Switch the pagination buttons when you're aware of all the current page vacancies
+3. Get acces to the particular job vacancy
+4. Click on the "add/remove to/from favourites button" to change the fav list 
+    
+## Favourites page features :stuck_out_tongue_winking_eye:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. The user can also visit the full info vacancy page 
+2. The user can also change favourites list and if it's empty he/she'll see the empty state redirect screen
 
-### `npm test`
+**The application was created using adaptive css :neckbeard:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Deploy: [https://repmacrypn.github.io/Jobored/]
+___
+**Created by Artem Efimovich :smirk:**
