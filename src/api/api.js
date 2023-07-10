@@ -1,15 +1,13 @@
 import axios from "axios";
 
 export const API_URL = 'https://api.superjob.ru/2.0/';
-export const ACCESS_TOKEN = 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948';
-export const SECRET_KEY = 'GEU4nvd3rej*jeh.eqp';
+export const SECRET_KEY = 'v3.r.137517554.6a3406a45db74566309a11194e021ee48878e9d2.7518f55ddb05ab00b122be23b82bf16a8ab671d5';
 
 const instance = axios.create({
     baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
-        'x-secret-key': SECRET_KEY,
-        'x-api-app-id': ACCESS_TOKEN,
+        'x-api-app-id': SECRET_KEY,
     },
 });
 
@@ -27,10 +25,10 @@ instance.interceptors.response.use((config) => {
     return config;
 }, async error => {
     const originalRequest = error.config;
-    if (error.response.status === 410 && error.config && !error.config._isRetry) {
+    if (error?.response?.status === 410 && error.config && !error.config._isRetry) {
         originalRequest._isRetry = true;
         try {
-            const response = await instance.get(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refresh_token')}&client_id=2356&client_secret=${ACCESS_TOKEN}`);
+            const response = await instance.get(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refresh_token')}&client_id=2356&client_secret=${SECRET_KEY}`);
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
             return instance.request(originalRequest);
@@ -43,7 +41,7 @@ instance.interceptors.response.use((config) => {
 
 export const authAPI = {
     async login() {
-        const response = await instance.get(`oauth2/password/?login=sergei.stralenia@gmail.com&password=paralect123&client_id=2356&client_secret=${ACCESS_TOKEN}&hr=0`);
+        const response = await instance.get(`oauth2/password/?login=artik3267@gmail.com&password=VGcf6498&client_id=2355&client_secret=${SECRET_KEY}&hr=0`);
         return response.data;
     },
 };
