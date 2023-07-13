@@ -46,24 +46,5 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
     reducerPath: 'vacanciesApi',
     baseQuery: baseQueryWithReAuth,
-    endpoints: (builder) => ({
-        login: builder.query({
-            query: () => `oauth2/password/?login=artik3267@gmail.com&password=VGcf6498&client_id=2355&client_secret=${SECRET_KEY}&hr=0`,
-        }),
-        //нужно будет разделить все и сделать inject endpoints
-        getVacancies: builder.query({
-            //у agreed есть дополнительная логика
-            query: ({ count, page, catalogue, paymentFrom, paymentTo, searchKeyWord, agreed }) =>
-                `vacancies/?no_agreement=${agreed}&count=${count}&page=${page}&published=1&keyword=${searchKeyWord}&payment_from=${paymentFrom}&payment_to=${paymentTo}&catalogues=${catalogue}`
-            ,
-        }),
-        getVacancy: builder.query({
-            query: (vacancyId) => `vacancies/${vacancyId}`,
-        }),
-        getAllCatalogues: builder.query({
-            query: () => 'catalogues/',
-        }),
-    }),
+    endpoints: (builder) => ({}),
 })
-
-export const { useGetPostsQuery, useLazyGetPostQuery, useAddNewPostMutation } = apiSlice
