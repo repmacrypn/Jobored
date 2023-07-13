@@ -36,7 +36,7 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
             // retry the initial query
             result = await baseQuery(args, api, extraOptions)
         } else {
-            console.warn('api 410 user not auth error');
+            console.warn('api 401 user not auth error');
         }
     }
 

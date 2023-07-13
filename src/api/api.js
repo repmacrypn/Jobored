@@ -28,7 +28,7 @@ instance.interceptors.response.use((config) => {
     if (error?.response?.status === 410 && error.config && !error.config._isRetry) {
         originalRequest._isRetry = true;
         try {
-            const response = await instance.get(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refresh_token')}&client_id=2356&client_secret=${SECRET_KEY}`);
+            const response = await instance.get(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refresh_token')}&client_id=2355&client_secret=${SECRET_KEY}`);
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
             return instance.request(originalRequest);
