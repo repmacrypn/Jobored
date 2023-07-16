@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 import { apiSlice } from './apiSlice'
 
 const initialState = {
-    count: 4,
     filterData: {
         catalogue: '',
         paymentFrom: '',

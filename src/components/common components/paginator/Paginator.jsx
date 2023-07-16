@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
 import ReactPaginate from 'react-paginate'
+import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
 import s from './FilterPage.module.css'
-import { getFavourites } from '../../../redux/favReducer'
+import { getFavourites } from '../../../redux/favSlice'
 
 export const Pagination = ({ totalCount, favourites }) => {
     const dispatch = useDispatch()

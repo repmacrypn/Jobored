@@ -1,12 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Paginator from '../common components/paginator/Paginator';
 import s from './Favourites.module.css';
 import { FavStar, VacancyData } from "../vacancies/Vacancies";
-import { processSalaryFieldAccom } from "../../utilites/processSalary";
 import EmptyState from "../common components/emptyState/EmptyState";
-import { useSelector } from "react-redux";
 
-const Favourites = () => {
+export const Favourites = () => {
     const favourites = useSelector(state => state.favourites.favourites)
     const resultContent = <CurrentFavArray />
 
@@ -21,7 +20,7 @@ const Favourites = () => {
                 favourites={favourites}
                 totalCount={favourites.length}
             />
-        </div >
+        </div>
     );
 };
 
@@ -37,7 +36,6 @@ const CurrentFavArray = ({ favourites }) => {
                 <VacancyData
                     isDefault={true}
                     obj={obj}
-                    processSalaryFieldAccom={processSalaryFieldAccom}
                 />
                 <FavStar
                     favourites={favourites}
@@ -51,5 +49,3 @@ const CurrentFavArray = ({ favourites }) => {
         <div>{content}</div>
     )
 }
-
-export default Favourites;
