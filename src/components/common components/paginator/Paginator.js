@@ -1,50 +1,57 @@
-import React from "react";
-import s from './Paginator.module.css';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
+import ReactPaginate from 'react-paginate'
+import s from './FilterPage.module.css'
+import { getFavourites } from '../../../redux/favReducer'
 
-const Paginator = ({ totalItemsCount, pageSize, currentPage,
-    onPageChange, portionSise = 3, setPaginatorPortionNum, paginatorPortionNum }) => {
+export const Pagination = ({ totalCount, favourites }) => {
+    const dispatch = useDispatch()
 
-    let pagesCount = Math.ceil(totalItemsCount / pageSize);
+    const [pageNumber, setPageNumber] = useState(0)
+    const itemsPerPage = 4
+    const pageCount = Math.ceil(totalCount / itemsPerPage)
 
-    const pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
+    const handlePageChange = (e) => {
+        dispatch(getFavourites(JSON.parse(JSON.stringify(favourites))
+            .slice(e.selected * itemsPerPage, e.selected * itemsPerPage + 4)))
+        setPageNumber(e.selected)
     }
 
-    let portionCount = Math.ceil(pagesCount / portionSise);
-    let leftPortionNumber = (paginatorPortionNum - 1) * portionSise + 1;
-    let rightPortionNumber = paginatorPortionNum * portionSise;
-
-    return <div className={s.paginator}>
-        <button
-            className={`${s.button} ${s.chevLeft}`}
-            disabled={!(paginatorPortionNum > 1)}
-            onClick={() => setPaginatorPortionNum(paginatorPortionNum - 1)}>
-        </button >
-        {
-            pages
-                .filter(p => {
-                    return p >= leftPortionNumber && p <= rightPortionNumber;
-                })
-                .map(p => {
-                    return (
-                        <div
-                            className={(p - 1) === currentPage ? `${s.selectedButton} ${s.button}` : s.button}
-                            key={p}
-                            onClick={() => onPageChange(p - 1)}
-                        >
-                            {p}
-                        </div>
-                    )
-                })
-        }
-        <button
-            className={`${s.button} ${s.chevRight}`}
-            disabled={!(portionCount > paginatorPortionNum)}
-            onClick={() => setPaginatorPortionNum(paginatorPortionNum + 1)}
-        >
-        </button>
-    </div>;
-};
-
-export default Paginator;
+    return (
+        <ReactPaginate
+            previousLabel={
+                <ChevronLeft
+                    className={s.icon}
+                    viewBox="0 0 24 24"
+                    height={14}
+                    width={20}
+                />
+            }
+            nextLabel={
+                <ChevronRight
+                    className={s.icon}
+                    viewBox="-2 0 24 24"
+                    height={14}
+                    width={20}
+                />
+            }
+            breakLabel={null}
+            pageCount={pageCount}
+            marginPagesDisplayed={0}
+            pageRangeDisplayed={4}
+            onPageChange={handlePageChange}
+            forcePage={pageNumber}
+            containerClassName={s.pagination}
+            breakClassName={s.navLi}
+            previousClassName={s.navLi}
+            nextClassName={s.navLi}
+            pageClassName={s.navLi}
+            activeLinkClassName={s.active}
+            breakLinkClassName={s.navA}
+            pageLinkClassName={s.navA}
+            previousLinkClassName={`${s.navA} ${s.moveButton}`}
+            nextLinkClassName={`${s.navA} ${s.moveButton}`}
+        />
+    )
+}

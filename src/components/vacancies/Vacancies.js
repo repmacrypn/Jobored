@@ -2,6 +2,9 @@ import React from "react";
 import s from './Vacancies.module.css';
 import '../../styles/defaultStyles.css';
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { modifyFavArray, setFavTotalCount } from "../../redux/favReducer";
+import { processSalaryFieldAccom } from "../../utilites/processSalary";
 
 const Vacancies = React.memo(({ vacancies, favourites, modifyFavArray,
     processSalaryFieldAccom, setFavTotalCount }) => {
@@ -30,7 +33,7 @@ const Vacancies = React.memo(({ vacancies, favourites, modifyFavArray,
     </div>
 });
 
-export const VacancyData = React.memo(({ obj, processSalaryFieldAccom, isDefault }) => {
+export const VacancyData = React.memo(({ obj, isDefault }) => {
 
     return <>
         <div className={isDefault ?
@@ -45,7 +48,6 @@ export const VacancyData = React.memo(({ obj, processSalaryFieldAccom, isDefault
             }
         </div>
         <WorkConditionField
-            processSalaryFieldAccom={processSalaryFieldAccom}
             isDefault={isDefault}
             obj={obj}
         />
@@ -58,7 +60,7 @@ export const VacancyData = React.memo(({ obj, processSalaryFieldAccom, isDefault
     </>
 });
 
-const WorkConditionField = ({ isDefault, processSalaryFieldAccom, obj }) => {
+const WorkConditionField = ({ isDefault, obj }) => {
     return <div className={s.workConditField}>
         <div className={isDefault ?
             `${s.salary} ${s.salaryDefaultFont}` :
@@ -77,12 +79,11 @@ const WorkConditionField = ({ isDefault, processSalaryFieldAccom, obj }) => {
     </div>;
 };
 
-export const FavStar = ({ favourites, obj, modifyFavArray, setFavTotalCount }) => {
+export const FavStar = ({ favourites, obj }) => {
+    const dispatch = useDispatch()
     const onFavButtonClick = (vacancy, isFav) => {
         modifyFavArray(vacancy, isFav);
-        isFav ?
-            setFavTotalCount(--favourites.length) :
-            setFavTotalCount(++favourites.length)
+        dispatch(setFavTotalCount(isFav))
     };
 
     return <>
