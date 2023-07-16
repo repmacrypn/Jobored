@@ -18,9 +18,11 @@ export const favSlice = createSlice({
                 state.favourites.push(action.vacancy)
         },
         setFavTotalCount: (state, action) => {
-            state.
-        }
+            action.isFav ?
+                state.favourites.length-- :
+                state.favourites.length++
+        },
     },
 })
-export const { getFavourites, modifyFavArray } = favSlice.actions
+export const { getFavourites, modifyFavArray, setFavTotalCount } = favSlice.actions
 export default favSlice.reducer

@@ -28,7 +28,7 @@ const Favourites = () => {
 const CurrentFavArray = ({ favourites }) => {
     const currentFavArray = useSelector(state => state.favourites.currentFavArray)
 
-    const resultContent = currentFavArray.map(obj => {
+    const content = currentFavArray.map(obj => {
         return (
             <div
                 className={s.vacancy}
@@ -48,7 +48,7 @@ const CurrentFavArray = ({ favourites }) => {
     })
 
     return (
-        <div>{resultContent}</div>
+        <div>{content}</div>
     )
 }
 
