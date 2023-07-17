@@ -3,10 +3,8 @@ export const ms = {
         input: {
             width: '100%',
             height: 42,
-
             marginBottom: 20,
             padding: '8px 12px',
-
             borderColor: '#D5D6DC',
             color: '#232134',
             font: 'normal 400 14px/20px Inter, sans-serif',
@@ -17,18 +15,14 @@ export const ms = {
         dropdown: {
             border: 'none',
             borderRadius: 8,
-
             width: '100%',
             height: 188,
-
             padding: 4,
         },
         item: {
             width: '97%',
             height: 36,
-
             padding: 8,
-
             borderRadius: 8,
             font: 'normal 400 14px/20px Inter, sans-serif',
             color: '#232134',
@@ -49,10 +43,8 @@ export const ms = {
         input: {
             width: '100%',
             height: 42,
-
             marginBottom: 8,
             padding: '8px 12px',
-
             backgroundColor: 'white',
             borderColor: '#D5D6DC',
             color: '#232134',
@@ -81,12 +73,9 @@ export const ms = {
     textInput: {
         input: {
             border: '1px solid #EAEBED',
-
             width: 773,
             height: 48,
-
             padding: '0px 12px',
-
             color: '#232134',
             font: 'normal 400 14px/20px Inter, sans-serif',
             '&:hover': {

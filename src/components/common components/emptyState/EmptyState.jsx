@@ -1,11 +1,9 @@
-import React from "react";
-import s from './EmptyState.module.css';
-import emptyState from '../../../resources/images/emptyState.png';
-import { connect } from "react-redux";
-import { getVacanciesOnFieldLoad } from '../../../redux/vacanciesReducer';
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import s from './EmptyState.module.css'
+import emptyState from '../../../resources/images/emptyState.png'
 
-const EmptyState = ({ isButtonNeeded }) => {
+export const EmptyState = ({ isButtonNeeded }) => {
     return <div className={s.emptyWrapper}>
         <img
             className={s.emptyState}
@@ -24,8 +22,4 @@ const EmptyState = ({ isButtonNeeded }) => {
             </div>
         }
     </div>
-};
-
-const mapStateToProps = (state) => ({});
-
-export default connect(mapStateToProps, { getVacanciesOnFieldLoad })(EmptyState);
+}
