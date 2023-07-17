@@ -8,6 +8,7 @@ import dropDown from '../../../resources/images/dropDown.png'
 import dropDownOnFocus from '../../../resources/images/dropDownOnFocus.png'
 import { ms } from '../../../styles/mantineStyles'
 import { saveFilterData, useGetAllCataloguesQuery, useLazyGetVacanciesQuery } from "../../../redux/vacanciesSlice"
+import { processNoAgreement } from "../../../utilites/processNoAgreement"
 
 export const Form = () => {
     const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(state => state.vacancies.filterData)
@@ -37,7 +38,7 @@ export const Form = () => {
                 setSearchValue={setSearchValue}
             />
         </div>
-    );
+    )
 }
 
 const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
@@ -49,13 +50,15 @@ const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
     const [isVisible, setIsVisible] = useState(false);
 
     const resetAllOnClick = (e) => {
-        setFromNum('');
-        setToNum('');
-        setSelectValue('');
-        setSearchValue('');
-        getVacancies(4, 0);
+        const agreed = processNoAgreement('', '')
+
+        setFromNum('')
+        setToNum('')
+        setSelectValue('')
+        setSearchValue('')
+        getVacancies(agreed, 4, 0)
         saveFilterData({ catalogue: '', paymentFrom: '', paymentTo: '', keyWord: '', })
-    };
+    }
 
     const cataloguesResult = allCatalogues.map(optObj => ({ value: optObj.key, label: optObj.title_trimmed }))
 
@@ -196,8 +199,10 @@ const SubmitButton = ({ text, className, selectValue, fromNum, toNum, searchValu
     const [getVacancies, { isFetching }] = useLazyGetVacanciesQuery()
 
     const onSubmitButtonClick = (e) => {
-        getVacancies(4, 0, selectValue, fromNum, toNum, searchValue);
-    };
+        const agreed = processNoAgreement(fromNum, toNum)
+
+        getVacancies(agreed, 4, 0, selectValue, fromNum, toNum, searchValue);
+    }
 
     return (
         <button
