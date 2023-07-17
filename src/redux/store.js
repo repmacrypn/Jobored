@@ -1,28 +1,31 @@
-import { applyMiddleware, combineReducers, legacy_createStore, compose } from 'redux'
-import thunk from 'redux-thunk'
+import { configureStore } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
-import authReducer from './authReducer'
 import vacanciesReducer from './vacanciesReducer'
 import favReducer from './favReducer'
-
-let reducers = combineReducers({
-    authReducer,
-    vacanciesReducer,
-    favReducer,
-});
+import { apiSlice } from './apiSlice'
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['favReducer'],
-};
+    whitelist: ['favReducer'], //favourites
+}
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedFavReducers = persistReducer(persistConfig, favReducer)
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = legacy_createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk)));
+export const store = configureStore({
+    reducer: {
+        [apiSlice.reducerPath]: apiSlice.reducer,
+        vacancies: vacanciesReducer,
+        favourites: persistedFavReducers,
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(apiSlice.middleware),
+})
 
-export let persistor = persistStore(store);
+/* const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = legacy_createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk))) */
 
-export default store;
+export const persistor = persistStore(store)
+
+/* export default store */

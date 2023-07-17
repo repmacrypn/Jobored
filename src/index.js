@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import store, { persistor } from './redux/store'
+import { store, persistor } from './redux/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -16,7 +16,7 @@ root.render(
     <HashRouter>
       <Provider store={store}>
         <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-          <App store={store} />
+          <App />
         </PersistGate>
       </Provider>
     </HashRouter>
