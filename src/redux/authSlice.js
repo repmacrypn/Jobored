@@ -5,9 +5,8 @@ export const extendedAuthApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.query({
             query: () => `oauth2/password/?login=artik3267@gmail.com&password=VGcf6498&client_id=2355&client_secret=${SECRET_KEY}&hr=0`,
-            //нужно будет засетать токены из респонса в локалсторэдж но не здесь
         }),
     })
 })
 
-export const { useLoginQuery } = extendedAuthApiSlice
+export const { useLazyLoginQuery } = extendedAuthApiSlice

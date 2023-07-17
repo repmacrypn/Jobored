@@ -8,6 +8,6 @@ const PageNotFound = () => {
             404 NOT FOUND xD
         </div>
     )
-};
+}
 
-export default PageNotFound;
+export default PageNotFound
