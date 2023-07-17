@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import Preloader from '../common components/preloader/Preloader';
-import { VacPagination } from '../common components/paginator/Paginator';
-import FilterForm from "./forms/FilterForm";
-import s from './Vacancies.module.css';
-import '../../styles/defaultStyles.css';
-import Vacancies from './Vacancies';
-import EmptyState from '../common components/emptyState/EmptyState';
-import { useLazyGetVacanciesQuery } from '../../redux/vacanciesSlice';
+import React, { useEffect } from 'react'
+import Preloader from '../common components/preloader/Preloader'
+import { VacPagination } from '../common components/paginator/Paginator'
+import FilterForm from './forms/FilterForm'
+import s from './Vacancies.module.css'
+import '../../styles/defaultStyles.css'
+import Vacancies from './Vacancies'
+import EmptyState from '../common components/emptyState/EmptyState'
+import { useLazyGetVacanciesQuery } from '../../redux/vacanciesSlice'
+import { processNoAgreement } from '../../utilites/processNoAgreement'
 
 export const VacanciesContainer = () => {
     return (
@@ -14,15 +15,17 @@ export const VacanciesContainer = () => {
             <FilterForm />
             <ContentField />
         </div>
-    );
-};
+    )
+}
 
 export const ContentField = () => {
     const [getVacancies, { isFetching, data: vacancies }] = useLazyGetVacanciesQuery()
     const totalCount = vacancies.length > 500 ? 500 : vacancies.length
 
     useEffect(() => {
-        getVacancies(4, 0, '', '', '', '');
+        const agreed = processNoAgreement('', '')
+
+        getVacancies(agreed, 4, 0, '', '', '', '');
     }, [getVacancies]);
 
     if (isFetching) return <Preloader />
@@ -39,4 +42,4 @@ export const ContentField = () => {
             />
         </div>
     )
-};
+}

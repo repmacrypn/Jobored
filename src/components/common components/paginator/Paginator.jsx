@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate'
 import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
 import s from './FilterPage.module.css'
 import { getFavourites } from '../../../redux/favSlice'
+import { processNoAgreement } from '../../../utilites/processNoAgreement'
 
 export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
     return (
@@ -68,15 +69,17 @@ export const FavPagination = ({ favourites, totalCount }) => {
 }
 
 export const VacPagination = ({ totalCount, getVacancies }) => {
-    const filterFata = useSelector(state => state.vacancies.filterData)
+    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(state => state.vacancies.filterData)
 
     const [pageNumber, setPageNumber] = useState(0)
     const itemsPerPage = 4
     const pageCount = Math.ceil(totalCount / itemsPerPage)
 
     const handlePageChange = (e) => {
-        getVacancies(itemsPerPage, e.selected, filterFata.catalogue,
-            filterFata.paymentFrom, filterFata.paymentTo, filterFata.keyWord)
+        const agreed = processNoAgreement(paymentFrom, paymentTo)
+
+        getVacancies(agreed, itemsPerPage, e.selected, catalogue,
+            paymentFrom, paymentTo, keyWord)
 
         setPageNumber(e.selected)
     }
