@@ -1,55 +1,36 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { FavStar, VacancyData } from "./Vacancies";
-import { processSalaryFieldAccom } from '../../utilites/processSalary';
-import Preloader from "../common components/preloader/Preloader";
-import { connect } from "react-redux";
-import { getVacancy } from "../../redux/vacanciesReducer";
-import s from './Vacancies.module.css';
-import parse from 'html-react-parser';
-import { setFavTotalCount, modifyFavArray } from '../../redux/favReducer';
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import parse from 'html-react-parser'
+import { FavStar, VacancyData } from './Vacancies'
+import s from './Vacancies.module.css'
+import { useGetVacancyQuery } from '../../redux/vacanciesSlice'
+import Preloader from '../common components/preloader/Preloader'
 
-const Vacancy = ({ getVacancy, vacancy, isFetching, favourites,
-    setFavTotalCount, modifyFavArray }) => {
+export const Vacancy = () => {
 
-    const { vacancyId } = useParams();
+    const { vacancyId } = useParams()
+    const { data: vacancy, isLoading } = useGetVacancyQuery(vacancyId)
 
-    useEffect(() => {
-        getVacancy(vacancyId);
-    }, [getVacancy, vacancyId]);
+    const vacancyRichText = parse(vacancy.vacancyRichText ? vacancy.vacancyRichText : '')
 
-    return <div>
-        {
-            isFetching ?
-                <Preloader /> :
-                <div className={s.pageWrapper}>
-                    <div className={`${s.vacancy} ${s.curVac}`}>
-                        <VacancyData
-                            isDefault={false}
-                            obj={vacancy}
-                            processSalaryFieldAccom={processSalaryFieldAccom}
-                        />
-                        <FavStar
-                            setFavTotalCount={setFavTotalCount}
-                            modifyFavArray={modifyFavArray}
-                            favourites={favourites}
-                            obj={vacancy}
-                        />
-                    </div>
-                    <div className={s.vacancyPageWrapper}>
-                        {parse(vacancy.vacancyRichText ? vacancy.vacancyRichText : '')}
-                    </div>
+    if (isLoading) return <Preloader />
+
+    return (
+        <div>
+            <div className={s.pageWrapper}>
+                <div className={`${s.vacancy} ${s.curVac}`}>
+                    <VacancyData
+                        isDefault={false}
+                        obj={vacancy}
+                    />
+                    <FavStar
+                        obj={vacancy}
+                    />
                 </div>
-        }
-    </div>;
-};
-
-const mapStateToProps = (state) => {
-    return {
-        vacancy: state.vacanciesReducer.vacancy,
-        isFetching: state.vacanciesReducer.isFetching,
-        favourites: state.favReducer.favourites,
-    };
-};
-
-export default connect(mapStateToProps, { getVacancy, modifyFavArray, setFavTotalCount })(Vacancy);
+                <div className={s.vacancyPageWrapper}>
+                    {vacancyRichText}
+                </div>
+            </div>
+        </div>
+    )
+}

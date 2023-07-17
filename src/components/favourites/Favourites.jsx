@@ -24,7 +24,7 @@ export const Favourites = () => {
     );
 };
 
-const CurrentFavArray = ({ favourites }) => {
+const CurrentFavArray = () => {
     const currentFavArray = useSelector(state => state.favourites.currentFavArray)
 
     const content = currentFavArray.map(obj => {
@@ -38,14 +38,11 @@ const CurrentFavArray = ({ favourites }) => {
                     obj={obj}
                 />
                 <FavStar
-                    favourites={favourites}
                     obj={obj}
                 />
             </div>
         )
     })
 
-    return (
-        <div>{content}</div>
-    )
+    return <div>{content}</div>
 }
