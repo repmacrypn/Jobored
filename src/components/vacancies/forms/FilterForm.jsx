@@ -1,17 +1,20 @@
-import React, { memo, useState } from "react"
+import React, { memo, useState } from 'react'
 import { Input, Select, NumberInput } from '@mantine/core'
 import { Search } from 'tabler-icons-react'
-import { useSelector } from "react-redux"
+import { useSelector } from 'react-redux'
 import s from './FilterForm.module.css'
 import '../../../styles/defaultStyles.css'
 import dropDown from '../../../resources/images/dropDown.png'
 import dropDownOnFocus from '../../../resources/images/dropDownOnFocus.png'
 import { ms } from '../../../styles/mantineStyles'
-import { saveFilterData, useGetAllCataloguesQuery, useLazyGetVacanciesQuery } from "../../../redux/vacanciesSlice"
-import { processNoAgreement } from "../../../utilites/processNoAgreement"
+import {
+    saveFilterData, selectFilterData,
+    useGetAllCataloguesQuery, useLazyGetVacanciesQuery,
+} from '../../../redux/vacanciesSlice'
+import { processNoAgreement } from '../../../utilites/processNoAgreement'
 
 export const Form = () => {
-    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(state => state.vacancies.filterData)
+    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(selectFilterData)
 
     const [fromNum, setFromNum] = useState(paymentFrom)
     const [toNum, setToNum] = useState(paymentTo)
@@ -46,8 +49,8 @@ const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
     const [getVacancies] = useLazyGetVacanciesQuery()
     const { data: allCatalogues } = useGetAllCataloguesQuery()
 
-    const [focused, setFocused] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
+    const [focused, setFocused] = useState(false)
+    const [isVisible, setIsVisible] = useState(false)
 
     const resetAllOnClick = (e) => {
         const agreed = processNoAgreement('', '')
@@ -80,7 +83,7 @@ const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
                     onChange={setSelectValue}
                     maxDropdownHeight={188}
                     data={cataloguesResult}
-                    placeholder="Выберите отрасль"
+                    placeholder='Выберите отрасль'
                     radius="md"
                     rightSectionWidth={40}
                     rightSection={focused ?
@@ -109,12 +112,12 @@ const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
                 <CustomNumberInput
                     value={fromNum}
                     setNum={setFromNum}
-                    placeholder="От"
+                    placeholder='От'
                 />
                 <CustomNumberInput
                     value={toNum}
                     setNum={setToNum}
-                    placeholder="До"
+                    placeholder='До'
                 />
                 <SubmitButton
                     selectValue={selectValue}
@@ -141,8 +144,8 @@ const SearchInput = ({ selectValue, fromNum, toNum, searchValue, setSearchValue 
                 onChange={(e) => setSearchValue(e.target.value)}
                 icon={<Search size={16} />}
                 iconWidth={30}
-                placeholder="Введите название вакансии"
-                radius="md"
+                placeholder='Введите название вакансии'
+                radius='md'
                 rightSectionWidth={107}
                 rightSection={
                     <SubmitButton
@@ -179,7 +182,7 @@ const CustomNumberInput = memo(({ value, placeholder, setNum }) => {
             value={value}
             onChange={(value) => setNum(+value)}
             placeholder={placeholder}
-            radius="md"
+            radius='md'
             rightSectionWidth={35}
             step={500}
             min={0}
@@ -198,10 +201,10 @@ const CustomNumberInput = memo(({ value, placeholder, setNum }) => {
 const SubmitButton = ({ text, className, selectValue, fromNum, toNum, searchValue }) => {
     const [getVacancies, { isFetching }] = useLazyGetVacanciesQuery()
 
-    const onSubmitButtonClick = (e) => {
+    const onSubmitButtonClick = () => {
         const agreed = processNoAgreement(fromNum, toNum)
 
-        getVacancies(agreed, 4, 0, selectValue, fromNum, toNum, searchValue);
+        getVacancies(agreed, 4, 0, selectValue, fromNum, toNum, searchValue)
     }
 
     return (

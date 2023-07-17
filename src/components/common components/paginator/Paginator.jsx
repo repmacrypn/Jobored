@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
 import s from './FilterPage.module.css'
 import { getFavourites } from '../../../redux/favSlice'
 import { processNoAgreement } from '../../../utilites/processNoAgreement'
+import { selectFilterData } from '../../../redux/vacanciesSlice'
 
 export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
     return (
@@ -12,7 +13,7 @@ export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
             previousLabel={
                 <ChevronLeft
                     className={s.icon}
-                    viewBox="0 0 24 24"
+                    viewBox='0 0 24 24'
                     height={14}
                     width={20}
                 />
@@ -20,7 +21,7 @@ export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
             nextLabel={
                 <ChevronRight
                     className={s.icon}
-                    viewBox="-2 0 24 24"
+                    viewBox='-2 0 24 24'
                     height={14}
                     width={20}
                 />
@@ -69,9 +70,10 @@ export const FavPagination = ({ favourites, totalCount }) => {
 }
 
 export const VacPagination = ({ totalCount, getVacancies }) => {
-    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(state => state.vacancies.filterData)
 
+    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(selectFilterData)
     const [pageNumber, setPageNumber] = useState(0)
+
     const itemsPerPage = 4
     const pageCount = Math.ceil(totalCount / itemsPerPage)
 

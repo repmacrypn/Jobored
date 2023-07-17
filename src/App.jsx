@@ -1,11 +1,11 @@
-import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import './App.css';
-import HeaderContainer from './components/header/HeaderContainer';
-import VacanciesContainer from './components/vacancies/VacanciesContainer';
-import FavouritesContainer from './components/favourites/FavouritesContainer';
-import VacancyContainer from './components/vacancies/Vacancy';
-import PageNotFound from './components/common components/404/PageNotFound';
+import React from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import './App.css'
+import HeaderContainer from './components/header/HeaderContainer'
+import VacanciesContainer from './components/vacancies/VacanciesContainer'
+import FavouritesContainer from './components/favourites/FavouritesContainer'
+import VacancyContainer from './components/vacancies/Vacancy'
+import PageNotFound from './components/common components/404/PageNotFound'
 
 function App() {
   return (

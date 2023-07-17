@@ -1,10 +1,10 @@
-import { applyMiddleware, combineReducers, legacy_createStore, compose } from 'redux';
-import thunk from 'redux-thunk';
-import authReducer from './authReducer';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import vacanciesReducer from './vacanciesReducer';
-import favReducer from './favReducer';
+import { applyMiddleware, combineReducers, legacy_createStore, compose } from 'redux'
+import thunk from 'redux-thunk'
+import storage from 'redux-persist/lib/storage'
+import { persistStore, persistReducer } from 'redux-persist'
+import authReducer from './authReducer'
+import vacanciesReducer from './vacanciesReducer'
+import favReducer from './favReducer'
 
 let reducers = combineReducers({
     authReducer,

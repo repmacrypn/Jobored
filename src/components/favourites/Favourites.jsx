@@ -1,12 +1,13 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { FavPagination } from '../common components/paginator/Paginator';
-import s from './Favourites.module.css';
-import { FavStar, VacancyData } from "../vacancies/Vacancies";
-import EmptyState from "../common components/emptyState/EmptyState";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import s from './Favourites.module.css'
+import { FavPagination } from '../common components/paginator/Paginator'
+import { FavStar, VacancyData } from '../vacancies/Vacancies'
+import EmptyState from '../common components/emptyState/EmptyState'
+import { selectFav } from '../../redux/favSlice'
 
 export const Favourites = () => {
-    const favourites = useSelector(state => state.favourites.favourites)
+    const favourites = useSelector(selectFav)
     const resultContent = <CurrentFavArray />
 
     if (!favourites.length) {

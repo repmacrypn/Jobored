@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
 import { FavStar, VacancyData } from './Vacancies'
 import s from './Vacancies.module.css'
-import { useGetVacancyQuery } from '../../redux/vacanciesSlice'
 import Preloader from '../common components/preloader/Preloader'
+import { useGetVacancyQuery } from '../../redux/vacanciesSlice'
 
 export const Vacancy = () => {
 

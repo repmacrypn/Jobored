@@ -1,10 +1,11 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import s from './Vacancies.module.css';
-import '../../styles/defaultStyles.css';
-import { modifyFavArray, setFavTotalCount } from "../../redux/favReducer";
-import { processSalaryFieldAccom } from "../../utilites/processSalary";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import s from './Vacancies.module.css'
+import '../../styles/defaultStyles.css'
+import { modifyFavArray, setFavTotalCount } from '../../redux/favReducer'
+import { processSalaryFieldAccom } from '../../utilites/processSalary'
+import { selectFav } from '../../redux/favSlice'
 
 export const Vacancies = ({ vacancies }) => {
     const mappedVacancies = vacancies.map(obj => {
@@ -83,7 +84,7 @@ const WorkConditionField = ({ isDefault, obj }) => {
 }
 
 export const FavStar = ({ obj }) => {
-    const favourites = useSelector(state => state.favourites.favourites)
+    const favourites = useSelector(selectFav)
 
     const favStarResult = favourites.find(fav => {
         return fav.id === obj.id
@@ -91,8 +92,8 @@ export const FavStar = ({ obj }) => {
         <UniqueFavStar vacancyObj={obj} isFav={true} /> :
         <UniqueFavStar vacancyObj={obj} isFav={false} />
 
-    return <>{favStarResult}</>;
-};
+    return <>{favStarResult}</>
+}
 
 const UniqueFavStar = ({ vacancyObj, isFav }) => {
     const dispatch = useDispatch()
@@ -100,7 +101,7 @@ const UniqueFavStar = ({ vacancyObj, isFav }) => {
     const onFavButtonClick = (vacancy, isFav) => {
         dispatch(modifyFavArray(vacancy, isFav))
         dispatch(setFavTotalCount(isFav))
-    };
+    }
 
     return (
         <div

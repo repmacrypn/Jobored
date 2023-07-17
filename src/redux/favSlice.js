@@ -24,5 +24,8 @@ export const favSlice = createSlice({
         },
     },
 })
+
+export const selectFav = (state) => state.favourites.favourites
+
 export const { getFavourites, modifyFavArray, setFavTotalCount } = favSlice.actions
 export default favSlice.reducer

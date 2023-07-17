@@ -22,6 +22,8 @@ export const filterSlice = createSlice({
     },
 })
 
+export const selectFilterData = state => state.vacancies.filterData
+
 export const { saveFilterData } = filterSlice.actions
 export default filterSlice.reducer
 
