@@ -41,4 +41,4 @@ export const extendedVacanciesApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const { useGetAllCataloguesQuery, useGetVacanciesQuery, useGetVacancyQuery } = extendedVacanciesApiSlice
+export const { useGetAllCataloguesQuery, useLazyGetVacanciesQuery, useGetVacancyQuery } = extendedVacanciesApiSlice

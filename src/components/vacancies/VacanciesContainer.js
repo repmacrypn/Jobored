@@ -1,118 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import {
-    setCurrentPage, getVacanciesOnFieldChange, getAllCatalogues,
-    getVacanciesOnFieldLoad
-} from '../../redux/vacanciesReducer';
-import { modifyFavArray, setFavTotalCount } from '../../redux/favReducer';
+import React, { useEffect } from 'react';
 import Preloader from '../common components/preloader/Preloader';
-import Paginator from '../common components/paginator/Paginator';
+import { VacPagination } from '../common components/paginator/Paginator';
 import FilterForm from "./forms/FilterForm";
 import s from './Vacancies.module.css';
 import '../../styles/defaultStyles.css';
 import Vacancies from './Vacancies';
 import EmptyState from '../common components/emptyState/EmptyState';
-import { processSalaryFieldAccom } from '../../utilites/processSalary';
+import { useLazyGetVacanciesQuery } from '../../redux/vacanciesSlice';
 
-const VacanciesContainer = ({ vacancies, currentPage, portionSise, getVacanciesOnFieldLoad,
-    catalogue, paymentFrom, paymentTo, keyWord, getAllCatalogues, getVacanciesOnFieldChange,
-    isFetching, allCatalogues, setCurrentPage, favourites, totalCount,
-    setFavTotalCount, modifyFavArray, count }) => {
-
-    const [paginatorPortionNum, setPaginatorPortionNum] = useState(Math.ceil((currentPage + 1) / portionSise));
-
-    useEffect(() => {
-        getVacanciesOnFieldLoad(count, currentPage, catalogue, paymentFrom, paymentTo, keyWord);
-    }, [getVacanciesOnFieldLoad]);
-
-    useEffect(() => {
-        getAllCatalogues();
-    }, [getAllCatalogues]);
-
-    const onPageChange = (pageNumber) => {
-        getVacanciesOnFieldChange(count, pageNumber, catalogue, paymentFrom, paymentTo, keyWord);
-    };
-
+export const VacanciesContainer = () => {
     return (
         <div className={`_mainContentField ${s.vacanciesWrapperField}`}>
-            <FilterForm
-                catalogue={catalogue}
-                paymentFrom={paymentFrom}
-                paymentTo={paymentTo}
-                keyWord={keyWord}
-                setPaginatorPortionNum={setPaginatorPortionNum}
-                getVacancies={getVacanciesOnFieldLoad}
-                allCatalogues={allCatalogues}
-                count={count}
-                setCurrentPage={setCurrentPage}
-            />
-            <ContentField
-                isFetching={isFetching}
-                vacancies={vacancies}
-                favourites={favourites}
-                processSalaryFieldAccom={processSalaryFieldAccom}
-                onPageChange={onPageChange}
-                pageSize={count}
-                totalItemsCount={totalCount}
-                currentPage={currentPage}
-                paginatorPortionNum={paginatorPortionNum}
-                setPaginatorPortionNum={setPaginatorPortionNum}
-                setFavTotalCount={setFavTotalCount}
-                modifyFavArray={modifyFavArray}
-            />
+            <FilterForm />
+            <ContentField />
         </div>
     );
 };
 
-export const ContentField = ({ vacancies, favourites, processSalaryFieldAccom,
-    pageSize, onPageChange, totalItemsCount, currentPage, setFavTotalCount,
-    paginatorPortionNum, setPaginatorPortionNum, modifyFavArray, isFetching }) => {
+export const ContentField = () => {
+    const [getVacancies, { isFetching, data: vacancies }] = useLazyGetVacanciesQuery()
+    const totalCount = vacancies.length > 500 ? 500 : vacancies.length
 
-    return <div className={s.contentField}>
-        {
-            isFetching ?
-                <Preloader /> :
-                !vacancies.length ?
-                    <EmptyState /> :
-                    <>
-                        <Vacancies
-                            setFavTotalCount={setFavTotalCount}
-                            modifyFavArray={modifyFavArray}
-                            vacancies={vacancies}
-                            favourites={favourites}
-                            processSalaryFieldAccom={processSalaryFieldAccom}
-                        />
-                        <Paginator
-                            onPageChange={onPageChange}
-                            pageSize={pageSize}
-                            totalItemsCount={totalItemsCount}
-                            currentPage={currentPage}
-                            paginatorPortionNum={paginatorPortionNum}
-                            setPaginatorPortionNum={setPaginatorPortionNum}
-                        />
-                    </>
-        }
-    </div>
+    useEffect(() => {
+        getVacancies(4, 0, '', '', '', '');
+    }, [getVacancies]);
+
+    if (isFetching) return <Preloader />
+    if (!vacancies.length) return <EmptyState />
+
+    return (
+        <div className={s.contentField}>
+            <Vacancies
+                vacancies={vacancies}
+            />
+            <VacPagination
+                totalCount={totalCount}
+                getVacancies={getVacancies}
+            />
+        </div>
+    )
 };
-
-const mapStateToProps = (state) => {
-    return {
-        vacancies: state.vacanciesReducer.vacancies,
-        catalogue: state.vacanciesReducer.catalogue,
-        paymentFrom: state.vacanciesReducer.paymentFrom,
-        paymentTo: state.vacanciesReducer.paymentTo,
-        keyWord: state.vacanciesReducer.keyWord,
-        count: state.vacanciesReducer.count,
-        portionSise: state.vacanciesReducer.portionSise,
-        totalCount: state.vacanciesReducer.totalCount,
-        currentPage: state.vacanciesReducer.currentPage,
-        isFetching: state.vacanciesReducer.isFetching,
-        allCatalogues: state.vacanciesReducer.allCatalogues,
-        favourites: state.favReducer.favourites,
-    };
-};
-
-export default connect(mapStateToProps, {
-    modifyFavArray, setCurrentPage, setFavTotalCount,
-    getVacanciesOnFieldChange, getAllCatalogues, getVacanciesOnFieldLoad,
-})(VacanciesContainer);

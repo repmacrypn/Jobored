@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Paginator from '../common components/paginator/Paginator';
+import { FavPagination } from '../common components/paginator/Paginator';
 import s from './Favourites.module.css';
 import { FavStar, VacancyData } from "../vacancies/Vacancies";
 import EmptyState from "../common components/emptyState/EmptyState";
@@ -16,7 +16,7 @@ export const Favourites = () => {
     return (
         <div className={s.contentFiled}>
             <div>{resultContent}</div>
-            <Paginator
+            <FavPagination
                 favourites={favourites}
                 totalCount={favourites.length}
             />
