@@ -47,7 +47,7 @@ export const Form = () => {
 const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
     setFromNum, setToNum, setSelectValue, setSearchValue }) => {
     const [getVacancies] = useLazyGetVacanciesQuery()
-    const { data: allCatalogues } = useGetAllCataloguesQuery()
+    const { data: allCatalogues = [] } = useGetAllCataloguesQuery()
 
     const [focused, setFocused] = useState(false)
     const [isVisible, setIsVisible] = useState(false)

@@ -4,20 +4,20 @@ import s from './Header.module.css'
 import { useLazyLoginQuery } from '../../redux/authSlice'
 
 export const Header = () => {
-    const [getLoginData, { data: { access_token, refresh_token } }] = useLazyLoginQuery()
+    const [getLoginData, { data: tokens }] = useLazyLoginQuery()
 
     useEffect(() => {
         if (!localStorage.getItem('access_token')) {
             try {
                 getLoginData()
 
-                localStorage.setItem('access_token', access_token)
-                localStorage.setItem('refresh_token', refresh_token)
+                localStorage.setItem('access_token', tokens.access_token)
+                localStorage.setItem('refresh_token', tokens.refresh_token)
             } catch (e) {
                 console.warn(e, 'login error')
             }
         }
-    }, [getLoginData, access_token, refresh_token])
+    }, [getLoginData, tokens?.access_token, tokens?.refresh_token])
 
     return (
         <header className={s.headerWrapper}>

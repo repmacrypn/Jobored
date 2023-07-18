@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import s from './Favourites.module.css'
 import { FavPagination } from '../common components/paginator/Paginator'
 import { FavStar, VacancyData } from '../vacancies/Vacancies'
-import EmptyState from '../common components/emptyState/EmptyState'
+import { EmptyState } from '../common components/emptyState/EmptyState'
 import { selectFav } from '../../redux/favSlice'
 
 export const Favourites = () => {

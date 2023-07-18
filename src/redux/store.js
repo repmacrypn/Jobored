@@ -1,23 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit'
-import storage from 'redux-persist/lib/storage'
-import { persistStore, persistReducer } from 'redux-persist'
-import vacanciesReducer from './vacanciesReducer'
-import favReducer from './favReducer'
+/* import storage from 'redux-persist/lib/storage'
+import { persistStore, persistReducer } from 'redux-persist' */
+import vacanciesReducer from './vacanciesSlice'
+import favReducer from './favSlice'
 import { apiSlice } from './apiSlice'
 
-const persistConfig = {
+/* const persistConfig = {
     key: 'root',
     storage,
     whitelist: ['favReducer'], //favourites
 }
 
-const persistedFavReducers = persistReducer(persistConfig, favReducer)
+const persistedFavReducers = persistReducer(persistConfig, favReducer) */
 
 export const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
         vacancies: vacanciesReducer,
-        favourites: persistedFavReducers,
+        favourites: favReducer, /* persistedFavReducers, */
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiSlice.middleware),
@@ -26,6 +26,6 @@ export const store = configureStore({
 /* const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = legacy_createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk))) */
 
-export const persistor = persistStore(store)
+/* export const persistor = persistStore(store) */
 
 /* export default store */

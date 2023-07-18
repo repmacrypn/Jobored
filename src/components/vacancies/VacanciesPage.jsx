@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import s from './Vacancies.module.css'
-import FilterForm from './forms/FilterForm'
-import Vacancies from './Vacancies'
-import EmptyState from '../common components/emptyState/EmptyState'
+import { Form } from './forms/FilterForm'
+import { Vacancies } from './Vacancies'
+import { EmptyState } from '../common components/emptyState/EmptyState'
 import Preloader from '../common components/preloader/Preloader'
 import { VacPagination } from '../common components/paginator/Paginator'
 import '../../styles/defaultStyles.css'
 import { useLazyGetVacanciesQuery } from '../../redux/vacanciesSlice'
 import { processNoAgreement } from '../../utilites/processNoAgreement'
 
-export const VacanciesContainer = () => {
+export const VacanciesPage = () => {
     return (
         <div className={`_mainContentField ${s.vacanciesWrapperField}`}>
-            <FilterForm />
+            <Form />
             <ContentField />
         </div>
     )
