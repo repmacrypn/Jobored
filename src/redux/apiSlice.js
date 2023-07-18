@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const API_URL = 'https://cors-anywhere.herokuapp.com/https://api.superjob.ru/2.0/'
+/* export const API_URL = 'https://cors-anywhere.herokuapp.com/https://api.superjob.ru/2.0/' */
 /* export const API_URL_PROXY = 'https://proxy-jobored.onrender.com/proxy/' */
+export const API_URL = 'https://proxy-jobored.onrender.com/proxy'
 export const SECRET_KEY = 'v3.r.137517554.6a3406a45db74566309a11194e021ee48878e9d2.7518f55ddb05ab00b122be23b82bf16a8ab671d5';
 
 // eslint-disable-next-line

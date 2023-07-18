@@ -24,7 +24,7 @@ export const VacanciesPage = () => {
 }
 
 export const ContentField = () => {
-    const [getVacancies, { isFetching, data: { total, vacancies } = { total: null, vacancies: [] } }] = useLazyGetVacanciesQuery()
+    const [getVacancies, { isFetching, isSuccess, data: { total, vacancies } = { total: null, vacancies: [] } }] = useLazyGetVacanciesQuery()
     const totalCount = total > 500 ? 500 : total
 
     useEffect(() => {
@@ -36,15 +36,16 @@ export const ContentField = () => {
     if (isFetching) return <Preloader />
     if (totalCount === 0) return <EmptyState />
 
-    return (
-        <div className={s.contentField}>
-            <Vacancies
-                vacancies={vacancies}
-            />
-            <VacPagination
-                totalCount={totalCount}
-                getVacancies={getVacancies}
-            />
-        </div>
-    )
+    return isSuccess &&
+        (
+            <div className={s.contentField}>
+                <Vacancies
+                    vacancies={vacancies}
+                />
+                <VacPagination
+                    totalCount={totalCount}
+                    getVacancies={getVacancies}
+                />
+            </div>
+        )
 }

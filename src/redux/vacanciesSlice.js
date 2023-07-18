@@ -8,6 +8,7 @@ const initialState = {
         paymentTo: '',
         keyWord: '',
     },
+    pageNumber: 0,
 }
 
 export const filterSlice = createSlice({
@@ -19,12 +20,15 @@ export const filterSlice = createSlice({
             //проверить здесь потом небудет ли ререндериться весь филтер компонент
             //из-за того что присваивается новай обьект
         },
+        setPageNumber: (state, action) => {
+            state.pageNumber = action.payload
+        }
     },
 })
 
 export const selectFilterData = state => state.vacancies.filterData
 
-export const { saveFilterData } = filterSlice.actions
+export const { saveFilterData, setPageNumber } = filterSlice.actions
 export default filterSlice.reducer
 
 export const extendedVacanciesApiSlice = apiSlice.injectEndpoints({

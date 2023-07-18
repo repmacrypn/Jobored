@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
 import s from './Paginator.module.css'
 import { getFavourites } from '../../../redux/favSlice'
 import { processNoAgreement } from '../../../utilites/processNoAgreement'
-import { selectFilterData } from '../../../redux/vacanciesSlice'
+import { selectFilterData, setPageNumber } from '../../../redux/vacanciesSlice'
 
 export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
     return (
@@ -29,7 +29,7 @@ export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
             breakLabel={null}
             pageCount={pageCount}
             marginPagesDisplayed={0}
-            pageRangeDisplayed={4}
+            pageRangeDisplayed={5}
             onPageChange={handlePageChange}
             forcePage={pageNumber}
             containerClassName={s.pagination}
@@ -72,7 +72,9 @@ export const FavPagination = ({ favourites, totalCount }) => {
 export const VacPagination = ({ totalCount, getVacancies }) => {
 
     const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(selectFilterData)
-    const [pageNumber, setPageNumber] = useState(0)
+
+    const dispatch = useDispatch()
+    const pageNumber = useSelector(state => state.vacancies.pageNumber)
 
     const itemsPerPage = 4
     const pageCount = Math.ceil(totalCount / itemsPerPage)
@@ -80,10 +82,12 @@ export const VacPagination = ({ totalCount, getVacancies }) => {
     const handlePageChange = (e) => {
         const agreed = processNoAgreement(paymentFrom, paymentTo)
 
-        getVacancies(agreed, itemsPerPage, e.selected, catalogue,
-            paymentFrom, paymentTo, keyWord)
+        getVacancies({
+            agreed, count: itemsPerPage, page: e.selected, catalogue,
+            paymentFrom, paymentTo, searchKeyWord: keyWord
+        })
 
-        setPageNumber(e.selected)
+        dispatch(setPageNumber(e.selected))
     }
 
     return (
