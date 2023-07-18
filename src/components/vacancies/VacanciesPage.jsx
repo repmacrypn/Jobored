@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import s from './Vacancies.module.css'
 import { Form } from './forms/FilterForm'
 import { Vacancies } from './Vacancies'
@@ -8,8 +9,12 @@ import { VacPagination } from '../common components/paginator/Paginator'
 import '../../styles/defaultStyles.css'
 import { useLazyGetVacanciesQuery } from '../../redux/vacanciesSlice'
 import { processNoAgreement } from '../../utilites/processNoAgreement'
+import { selectIsAuth } from '../../redux/authSlice'
 
 export const VacanciesPage = () => {
+    const isAuth = useSelector(selectIsAuth)
+    if (!isAuth) return <Preloader />
+
     return (
         <div className={`_mainContentField ${s.vacanciesWrapperField}`}>
             <Form />
@@ -19,17 +24,17 @@ export const VacanciesPage = () => {
 }
 
 export const ContentField = () => {
-    const [getVacancies, { isFetching, data: vacancies }] = useLazyGetVacanciesQuery()
-    const totalCount = vacancies.length > 500 ? 500 : vacancies.length
+    const [getVacancies, { isFetching, data: { total, vacancies } = { total: null, vacancies: [] } }] = useLazyGetVacanciesQuery()
+    const totalCount = total > 500 ? 500 : total
 
     useEffect(() => {
         const agreed = processNoAgreement('', '')
 
-        getVacancies(agreed, 4, 0, '', '', '', '');
+        getVacancies({ agreed, count: 4, page: 0, catalogue: '', paymentFrom: '', paymentTo: '', searchKeyWord: '' })
     }, [getVacancies]);
 
     if (isFetching) return <Preloader />
-    if (!vacancies.length) return <EmptyState />
+    if (totalCount === 0) return <EmptyState />
 
     return (
         <div className={s.contentField}>

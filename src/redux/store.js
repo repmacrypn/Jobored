@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist' */
 import vacanciesReducer from './vacanciesSlice'
 import favReducer from './favSlice'
+import authReducer from './authSlice'
 import { apiSlice } from './apiSlice'
 
 /* const persistConfig = {
@@ -18,6 +19,7 @@ export const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         vacancies: vacanciesReducer,
         favourites: favReducer, /* persistedFavReducers, */
+        auth: authReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiSlice.middleware),

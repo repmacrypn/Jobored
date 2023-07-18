@@ -32,6 +32,9 @@ export const extendedVacanciesApiSlice = apiSlice.injectEndpoints({
         getVacancies: builder.query({
             query: ({ agreed, count, page, catalogue = '', paymentFrom = '', paymentTo = '', searchKeyWord = '' }) =>
                 `vacancies/?no_agreement=${agreed}&count=${count}&page=${page}&published=1&keyword=${searchKeyWord}&payment_from=${paymentFrom}&payment_to=${paymentTo}&catalogues=${catalogue}`,
+            transformResponse: (responseData) => {
+                return { vacancies: responseData.objects, total: responseData.total }
+            }
         }),
         getVacancy: builder.query({
             query: (vacancyId) => `vacancies/${vacancyId}`,

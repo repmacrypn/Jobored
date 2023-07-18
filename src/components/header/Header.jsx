@@ -1,23 +1,26 @@
 import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import s from './Header.module.css'
-import { useLazyLoginQuery } from '../../redux/authSlice'
+import { setIsAuth, useLazyLoginQuery } from '../../redux/authSlice'
+import { useDispatch } from 'react-redux'
 
 export const Header = () => {
-    const [getLoginData, { data: tokens }] = useLazyLoginQuery()
+    const [getLoginData] = useLazyLoginQuery()
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        if (!localStorage.getItem('access_token')) {
-            try {
-                getLoginData()
+        (async () => {
+            if (!localStorage.getItem('access_token')) {
+                const { data: { access_token, refresh_token }, isSuccess } = await getLoginData()
 
-                localStorage.setItem('access_token', tokens.access_token)
-                localStorage.setItem('refresh_token', tokens.refresh_token)
-            } catch (e) {
-                console.warn(e, 'login error')
+                if (isSuccess) {
+                    localStorage.setItem('access_token', access_token)
+                    localStorage.setItem('refresh_token', refresh_token)
+                }
             }
-        }
-    }, [getLoginData, tokens?.access_token, tokens?.refresh_token])
+            dispatch(setIsAuth(true))
+        })()
+    }, [getLoginData, dispatch])
 
     return (
         <header className={s.headerWrapper}>
@@ -48,7 +51,7 @@ export const Header = () => {
                     />
                 </nav>
             </div>
-        </header>
+        </header >
     )
 }
 
