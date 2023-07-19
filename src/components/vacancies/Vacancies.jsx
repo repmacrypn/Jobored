@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import s from './Vacancies.module.css'
 import '../../styles/defaultStyles.css'
-import { modifyFavArray, setFavTotalCount } from '../../redux/favSlice'
+import { modifyFavArray } from '../../redux/favSlice'
 import { processSalaryFieldAccom } from '../../utilites/processSalary'
 import { selectFav } from '../../redux/favSlice'
 
