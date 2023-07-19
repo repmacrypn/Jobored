@@ -136,17 +136,17 @@
     background: no-repeat 0px 0px/22px 22px;
 }
 
-.fav {
+.favStar:hover {
+    cursor: pointer;
+    background-image: url('../../resources/images/StarOnHover.png');
+}
+
+.favStartrue {
     background-image: url('../../resources/images/StarFav.png');
 }
 
-.notFav {
+.favStarfalse {
     background-image: url('../../resources/images/StarNotFav.png');
-}
-
-.favStar:hover {
-    background-image: url('../../resources/images/StarOnHover.png');
-    cursor: pointer;
 }
 
 .pageWrapper {

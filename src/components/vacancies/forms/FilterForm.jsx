@@ -15,12 +15,12 @@ import {
 import { processNoAgreement } from '../../../utilites/processNoAgreement'
 
 export const Form = () => {
-    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(selectQueryData)
+    const { catalogue, paymentFrom, paymentTo, searchKeyWord } = useSelector(selectQueryData)
 
     const [fromNum, setFromNum] = useState(paymentFrom)
     const [toNum, setToNum] = useState(paymentTo)
     const [selectValue, setSelectValue] = useState(catalogue)
-    const [searchValue, setSearchValue] = useState(keyWord)
+    const [searchValue, setSearchValue] = useState(searchKeyWord)
 
     return (
         <div className={s.filterField}>

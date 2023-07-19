@@ -96,16 +96,17 @@ export const FavStar = ({ obj }) => {
 }
 
 const UniqueFavStar = ({ vacancyObj, isFav }) => {
+    const className = `favStar${isFav}`
     const dispatch = useDispatch()
 
-    const onFavButtonClick = (vacancy, isFav) => {
-        dispatch(modifyFavArray(vacancy, isFav))
-        dispatch(setFavTotalCount(isFav))
+    const onFavButtonClick = (vacancy, isFavCur) => {
+        dispatch(modifyFavArray({ vacancy, isFavCur }))
+        /* dispatch(setFavTotalCount(isFavCur)) */
     }
 
     return (
         <div
-            className={`${s.favStar} ${s.notFav}`}
+            className={`${s[className]} ${s.favStar}`}
             onClick={() => onFavButtonClick(vacancyObj, isFav)}>
         </div>
     )

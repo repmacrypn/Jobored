@@ -13,14 +13,16 @@ export const favSlice = createSlice({
             state.favourites = action.payload
         },
         modifyFavArray: (state, action) => {
-            action.isFav ?
-                state.favourites.filter(fav => fav.id !== action.vacancy.id) :
-                state.favourites.push(action.vacancy)
+            const { isFavCur, vacancy } = action.payload
+
+            isFavCur ?
+                state.favourites = state.favourites.filter(fav => fav.id !== vacancy.id) :
+                state.favourites.push(vacancy)
         },
         setFavTotalCount: (state, action) => {
-            action.isFav ?
-                state.favourites.length-- :
-                state.favourites.length++
+            action.payload.isFavCur ?
+                state.favourites.length++ :
+                state.favourites.length--
         },
     },
 })
