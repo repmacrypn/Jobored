@@ -101,7 +101,6 @@ const UniqueFavStar = ({ vacancyObj, isFav }) => {
 
     const onFavButtonClick = (vacancy, isFavCur) => {
         dispatch(modifyFavArray({ vacancy, isFavCur }))
-        /* dispatch(setFavTotalCount(isFavCur)) */
     }
 
     return (

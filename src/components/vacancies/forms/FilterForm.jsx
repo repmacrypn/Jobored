@@ -7,11 +7,7 @@ import '../../../styles/defaultStyles.css'
 import dropDown from '../../../resources/images/dropDown.png'
 import dropDownOnFocus from '../../../resources/images/dropDownOnFocus.png'
 import { ms } from '../../../styles/mantineStyles'
-import {
-    saveQueryData,
-    selectQueryData,
-    useGetAllCataloguesQuery,
-} from '../../../redux/vacanciesSlice'
+import { saveQueryData, selectQueryData, useGetAllCataloguesQuery } from '../../../redux/vacanciesSlice'
 import { processNoAgreement } from '../../../utilites/processNoAgreement'
 
 export const Form = () => {
@@ -213,7 +209,6 @@ const SubmitButton = ({ text, className, catalogue, paymentFrom, paymentTo, sear
         <button
             className={`${s[className]} ${s.defaultButtonStyles}`}
             onClick={onSubmitButtonClick}
-        /* disabled={isFetching} */
         >
             {text}
         </button>
