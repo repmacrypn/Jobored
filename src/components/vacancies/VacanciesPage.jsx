@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import s from './Vacancies.module.css'
 import { Form } from './forms/FilterForm'
@@ -7,8 +7,7 @@ import { EmptyState } from '../common components/emptyState/EmptyState'
 import Preloader from '../common components/preloader/Preloader'
 import { VacPagination } from '../common components/paginator/Paginator'
 import '../../styles/defaultStyles.css'
-import { useLazyGetVacanciesQuery } from '../../redux/vacanciesSlice'
-import { processNoAgreement } from '../../utilites/processNoAgreement'
+import { selectQueryData, useGetVacanciesQuery } from '../../redux/vacanciesSlice'
 import { selectIsAuth } from '../../redux/authSlice'
 
 export const VacanciesPage = () => {
@@ -24,14 +23,11 @@ export const VacanciesPage = () => {
 }
 
 export const ContentField = () => {
-    const [getVacancies, { isFetching, isSuccess, data: { total, vacancies } = { total: null, vacancies: [] } }] = useLazyGetVacanciesQuery()
+    const query = useSelector(selectQueryData)
+
+    const { isFetching, isSuccess, data: { total, vacancies } = { total: null, vacancies: [] } } = useGetVacanciesQuery(query)
+
     const totalCount = total > 500 ? 500 : total
-
-    useEffect(() => {
-        const agreed = processNoAgreement('', '')
-
-        getVacancies({ agreed, count: 4, page: 0, catalogue: '', paymentFrom: '', paymentTo: '', searchKeyWord: '' })
-    }, [getVacancies]);
 
     if (isFetching) return <Preloader />
     if (totalCount === 0) return <EmptyState />
@@ -43,8 +39,8 @@ export const ContentField = () => {
                     vacancies={vacancies}
                 />
                 <VacPagination
+                    query={query}
                     totalCount={totalCount}
-                    getVacancies={getVacancies}
                 />
             </div>
         )

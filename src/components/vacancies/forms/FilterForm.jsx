@@ -1,20 +1,21 @@
 import React, { memo, useState } from 'react'
 import { Input, Select, NumberInput } from '@mantine/core'
 import { Search } from 'tabler-icons-react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import s from './FilterForm.module.css'
 import '../../../styles/defaultStyles.css'
 import dropDown from '../../../resources/images/dropDown.png'
 import dropDownOnFocus from '../../../resources/images/dropDownOnFocus.png'
 import { ms } from '../../../styles/mantineStyles'
 import {
-    saveFilterData, selectFilterData,
-    useGetAllCataloguesQuery, useLazyGetVacanciesQuery,
+    saveQueryData,
+    selectQueryData,
+    useGetAllCataloguesQuery,
 } from '../../../redux/vacanciesSlice'
 import { processNoAgreement } from '../../../utilites/processNoAgreement'
 
 export const Form = () => {
-    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(selectFilterData)
+    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(selectQueryData)
 
     const [fromNum, setFromNum] = useState(paymentFrom)
     const [toNum, setToNum] = useState(paymentTo)
@@ -24,19 +25,19 @@ export const Form = () => {
     return (
         <div className={s.filterField}>
             <FilterForm
-                fromNum={fromNum}
-                toNum={toNum}
-                selectValue={selectValue}
-                searchValue={searchValue}
+                paymentFrom={fromNum}
+                paymentTo={toNum}
+                catalogue={selectValue}
+                searchKeyWord={searchValue}
                 setFromNum={setFromNum}
                 setToNum={setToNum}
                 setSelectValue={setSelectValue}
                 setSearchValue={setSearchValue}
             />
             <SearchInput
-                fromNum={fromNum}
-                toNum={toNum}
-                selectValue={selectValue}
+                paymentFrom={fromNum}
+                paymentTo={toNum}
+                catalogue={selectValue}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
             />
@@ -44,9 +45,10 @@ export const Form = () => {
     )
 }
 
-const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
+const FilterForm = ({ paymentFrom, paymentTo, catalogue, searchKeyWord,
     setFromNum, setToNum, setSelectValue, setSearchValue }) => {
-    const [getVacancies] = useLazyGetVacanciesQuery()
+    const dispatch = useDispatch()
+
     const { data: allCatalogues = [] } = useGetAllCataloguesQuery()
 
     const [focused, setFocused] = useState(false)
@@ -59,8 +61,8 @@ const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
         setToNum('')
         setSelectValue('')
         setSearchValue('')
-        getVacancies(agreed, 4, 0)
-        saveFilterData({ catalogue: '', paymentFrom: '', paymentTo: '', keyWord: '', })
+
+        dispatch(saveQueryData({ agreed, count: 4, page: 0, catalogue: '', paymentFrom: '', paymentTo: '', searchKeyWord: '' }))
     }
 
     const cataloguesResult = allCatalogues.map(optObj => ({ value: optObj.key, label: optObj.title_trimmed }))
@@ -79,7 +81,7 @@ const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
                     className='factoryLabel'
                 />
                 <Select
-                    value={selectValue}
+                    value={catalogue}
                     onChange={setSelectValue}
                     maxDropdownHeight={188}
                     data={cataloguesResult}
@@ -110,20 +112,20 @@ const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
                     className='salaryLabel'
                 />
                 <CustomNumberInput
-                    value={fromNum}
+                    value={paymentFrom}
                     setNum={setFromNum}
                     placeholder='От'
                 />
                 <CustomNumberInput
-                    value={toNum}
+                    value={paymentTo}
                     setNum={setToNum}
                     placeholder='До'
                 />
                 <SubmitButton
-                    selectValue={selectValue}
-                    fromNum={fromNum}
-                    toNum={toNum}
-                    searchValue={searchValue}
+                    catalogue={catalogue}
+                    paymentFrom={paymentFrom}
+                    paymentTo={paymentTo}
+                    searchKeyWord={searchKeyWord}
                     text='Применить'
                     className='submitButton'
                 />
@@ -136,7 +138,7 @@ const FilterForm = ({ fromNum, toNum, selectValue, searchValue,
     )
 }
 
-const SearchInput = ({ selectValue, fromNum, toNum, searchValue, setSearchValue }) => {
+const SearchInput = ({ catalogue, paymentFrom, paymentTo, searchValue, setSearchValue }) => {
     return (
         <form className={s.searchField}>
             <Input
@@ -149,10 +151,10 @@ const SearchInput = ({ selectValue, fromNum, toNum, searchValue, setSearchValue 
                 rightSectionWidth={107}
                 rightSection={
                     <SubmitButton
-                        selectValue={selectValue}
-                        fromNum={fromNum}
-                        toNum={toNum}
-                        searchValue={searchValue}
+                        catalogue={catalogue}
+                        paymentFrom={paymentFrom}
+                        paymentTo={paymentTo}
+                        searchKeyWord={searchValue}
                         text='Поиск'
                         className='searchButton'
                     />
@@ -198,20 +200,20 @@ const CustomNumberInput = memo(({ value, placeholder, setNum }) => {
     )
 })
 
-const SubmitButton = ({ text, className, selectValue, fromNum, toNum, searchValue }) => {
-    const [getVacancies, { isFetching }] = useLazyGetVacanciesQuery()
+const SubmitButton = ({ text, className, catalogue, paymentFrom, paymentTo, searchKeyWord }) => {
+    const dispatch = useDispatch()
 
-    const onSubmitButtonClick = () => {
-        const agreed = processNoAgreement(fromNum, toNum)
-
-        getVacancies(agreed, 4, 0, selectValue, fromNum, toNum, searchValue)
+    const onSubmitButtonClick = (e) => {
+        e.preventDefault()
+        const agreed = processNoAgreement(paymentFrom, paymentTo)
+        dispatch(saveQueryData({ agreed, count: 4, page: 0, catalogue, paymentFrom, paymentTo, searchKeyWord }))
     }
 
     return (
         <button
             className={`${s[className]} ${s.defaultButtonStyles}`}
             onClick={onSubmitButtonClick}
-            disabled={isFetching}
+        /* disabled={isFetching} */
         >
             {text}
         </button>

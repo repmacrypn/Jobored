@@ -2,33 +2,30 @@ import { createSlice } from '@reduxjs/toolkit'
 import { apiSlice } from './apiSlice'
 
 const initialState = {
-    filterData: {
+    query: {
         catalogue: '',
         paymentFrom: '',
         paymentTo: '',
-        keyWord: '',
+        searchKeyWord: '',
+        count: 4,
+        page: 0,
+        agreed: 0,
     },
-    pageNumber: 0,
 }
 
 export const filterSlice = createSlice({
     name: 'vacancies',
     initialState,
     reducers: {
-        saveFilterData: (state, action) => {
-            state.filterData = action.payload
-            //проверить здесь потом небудет ли ререндериться весь филтер компонент
-            //из-за того что присваивается новай обьект
+        saveQueryData: (state, action) => {
+            state.query = action.payload
         },
-        setPageNumber: (state, action) => {
-            state.pageNumber = action.payload
-        }
     },
 })
 
-export const selectFilterData = state => state.vacancies.filterData
+export const selectQueryData = state => state.vacancies.query
 
-export const { saveFilterData, setPageNumber } = filterSlice.actions
+export const { saveQueryData } = filterSlice.actions
 export default filterSlice.reducer
 
 export const extendedVacanciesApiSlice = apiSlice.injectEndpoints({
@@ -49,4 +46,4 @@ export const extendedVacanciesApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const { useGetAllCataloguesQuery, useLazyGetVacanciesQuery, useGetVacancyQuery } = extendedVacanciesApiSlice
+export const { useGetAllCataloguesQuery, useGetVacanciesQuery, useGetVacancyQuery } = extendedVacanciesApiSlice

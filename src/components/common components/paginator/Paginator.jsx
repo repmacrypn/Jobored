@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate'
 import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
 import s from './Paginator.module.css'
 import { getFavourites } from '../../../redux/favSlice'
-import { processNoAgreement } from '../../../utilites/processNoAgreement'
-import { selectFilterData, setPageNumber } from '../../../redux/vacanciesSlice'
+import { saveQueryData } from '../../../redux/vacanciesSlice'
 
 export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
     return (
@@ -29,7 +28,7 @@ export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
             breakLabel={null}
             pageCount={pageCount}
             marginPagesDisplayed={0}
-            pageRangeDisplayed={5}
+            pageRangeDisplayed={4}
             onPageChange={handlePageChange}
             forcePage={pageNumber}
             containerClassName={s.pagination}
@@ -69,31 +68,19 @@ export const FavPagination = ({ favourites, totalCount }) => {
     )
 }
 
-export const VacPagination = ({ totalCount, getVacancies }) => {
-
-    const { catalogue, paymentFrom, paymentTo, keyWord } = useSelector(selectFilterData)
-
+export const VacPagination = ({ totalCount, query }) => {
     const dispatch = useDispatch()
-    const pageNumber = useSelector(state => state.vacancies.pageNumber)
 
-    const itemsPerPage = 4
-    const pageCount = Math.ceil(totalCount / itemsPerPage)
+    const pageCount = Math.ceil(totalCount / query.count)
 
     const handlePageChange = (e) => {
-        const agreed = processNoAgreement(paymentFrom, paymentTo)
-
-        getVacancies({
-            agreed, count: itemsPerPage, page: e.selected, catalogue,
-            paymentFrom, paymentTo, searchKeyWord: keyWord
-        })
-
-        dispatch(setPageNumber(e.selected))
+        dispatch(saveQueryData({ ...query, page: e.selected }))
     }
 
     return (
         <Pagination
             pageCount={pageCount}
-            pageNumber={pageNumber}
+            pageNumber={query.page}
             handlePageChange={handlePageChange}
         />
     )
