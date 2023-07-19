@@ -9,10 +9,11 @@ import { useGetVacancyQuery } from '../../redux/vacanciesSlice'
 export const Vacancy = () => {
 
     const { vacancyId } = useParams()
-    const { data: vacancy, isLoading } = useGetVacancyQuery(vacancyId)
+    const { data: vacancy, isLoading, isSuccess } = useGetVacancyQuery(vacancyId)
 
-    const vacancyRichText = parse(vacancy.vacancyRichText ? vacancy.vacancyRichText : '')
+    let vacancyRichText
 
+    if (isSuccess) vacancyRichText = parse(vacancy.vacancyRichText ? vacancy.vacancyRichText : '')
     if (isLoading) return <Preloader />
 
     return (

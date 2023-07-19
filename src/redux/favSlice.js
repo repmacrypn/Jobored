@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     favourites: [],
     currentFavArray: [],
+    page: 0,
 }
 
 export const favSlice = createSlice({
@@ -10,7 +11,7 @@ export const favSlice = createSlice({
     initialState,
     reducers: {
         getFavourites: (state, action) => {
-            state.favourites = action.payload
+            state.currentFavArray = action.payload
         },
         modifyFavArray: (state, action) => {
             const { isFavCur, vacancy } = action.payload
@@ -19,15 +20,13 @@ export const favSlice = createSlice({
                 state.favourites = state.favourites.filter(fav => fav.id !== vacancy.id) :
                 state.favourites.push(vacancy)
         },
-        setFavTotalCount: (state, action) => {
-            action.payload.isFavCur ?
-                state.favourites.length++ :
-                state.favourites.length--
-        },
+        setPageNumber: (state, action) => {
+            state.page = action.payload
+        }
     },
 })
 
 export const selectFav = (state) => state.favourites.favourites
 
-export const { getFavourites, modifyFavArray, setFavTotalCount } = favSlice.actions
+export const { getFavourites, modifyFavArray, setPageNumber } = favSlice.actions
 export default favSlice.reducer

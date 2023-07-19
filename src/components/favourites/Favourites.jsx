@@ -1,14 +1,22 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import s from './Favourites.module.css'
 import { FavPagination } from '../common components/paginator/Paginator'
 import { FavStar, VacancyData } from '../vacancies/Vacancies'
 import { EmptyState } from '../common components/emptyState/EmptyState'
-import { selectFav } from '../../redux/favSlice'
+import { getFavourites, selectFav } from '../../redux/favSlice'
 
 export const Favourites = () => {
+    const dispatch = useDispatch()
     const favourites = useSelector(selectFav)
-    const resultContent = <CurrentFavArray />
+    const page = useSelector(state => state.favourites.page)
+
+    const itemsPerPage = 4
+
+    useEffect(() => {
+        dispatch(getFavourites(JSON.parse(JSON.stringify(favourites))
+            .slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)))
+    }, [page, dispatch, favourites])
 
     if (!favourites.length) {
         return <EmptyState isButtonNeeded={true} />;
@@ -16,10 +24,12 @@ export const Favourites = () => {
 
     return (
         <div className={s.contentFiled}>
-            <div>{resultContent}</div>
+            <CurrentFavArray />
             <FavPagination
-                favourites={favourites}
                 totalCount={favourites.length}
+                itemsPerPage={itemsPerPage}
+                pageNumber={page}
+                dispatch={dispatch}
             />
         </div>
     );
