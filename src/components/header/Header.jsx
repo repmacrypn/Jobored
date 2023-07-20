@@ -10,12 +10,12 @@ export const Header = () => {
 
     useEffect(() => {
         (async () => {
-            if (!localStorage.getItem('access_token')) {
+            if (!localStorage.getItem('accessToken')) {
                 const { data: { access_token, refresh_token }, isSuccess } = await getLoginData()
 
                 if (isSuccess) {
-                    localStorage.setItem('access_token', access_token)
-                    localStorage.setItem('refresh_token', refresh_token)
+                    localStorage.setItem('accessToken', access_token)
+                    localStorage.setItem('refreshToken', refresh_token)
                 }
             }
             dispatch(setIsAuth(true))

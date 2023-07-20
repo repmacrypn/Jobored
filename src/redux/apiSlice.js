@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
         'x-api-app-id': SECRET_KEY,
     },
     prepareHeaders: (headers) => {
-        const access = localStorage.getItem('access_token')
+        const access = localStorage.getItem('accessToken')
 
         if (access) {
             headers.set('authorization', `Bearer ${access}`)
@@ -31,11 +31,11 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
 
     if (result.error && result.error.status === 410) {
         // try to get a new token
-        const refreshResult = await baseQuery(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refresh_token')}&client_id=2355&client_secret=${SECRET_KEY}`, api, extraOptions)
+        const refreshResult = await baseQuery(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refreshToken')}&client_id=2355&client_secret=${SECRET_KEY}`, api, extraOptions)
         if (refreshResult.data) {
             // store the new token
-            localStorage.setItem('access_token', refreshResult.data.access_token);
-            localStorage.setItem('refresh_token', refreshResult.data.refresh_token);
+            localStorage.setItem('accessToken', refreshResult.data.access_token);
+            localStorage.setItem('refreshToken', refreshResult.data.refresh_token);
             // retry the initial query
             result = await baseQuery(args, api, extraOptions)
         } else {
