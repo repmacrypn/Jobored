@@ -1,13 +1,13 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { MantineProvider } from '@mantine/core'
-/* import { PersistGate } from 'redux-persist/integration/react' */
+import { PersistGate } from 'redux-persist/integration/react'
 import { HashRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { store, /* persistor */ } from './redux/store'
+import { store, persistor } from './redux/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
@@ -15,9 +15,9 @@ root.render(
   <MantineProvider withGlobalStyles withNormalizeCSS>
     <HashRouter>
       <Provider store={store}>
-        {/* <PersistGate loading={<div>Loading...</div>} persistor={persistor}> */}
-        <App />
-        {/* </PersistGate> */}
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>
     </HashRouter>
   </MantineProvider>
