@@ -1,4 +1,3 @@
-import React from 'react'
 import s from './PageNotFound.module.css'
 import '../../../styles/defaultStyles.css'
 

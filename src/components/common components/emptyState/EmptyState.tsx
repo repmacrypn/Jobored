@@ -1,9 +1,12 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import s from './EmptyState.module.css'
 import emptyState from '../../../resources/images/emptyState.png'
 
-export const EmptyState = ({ isButtonNeeded }) => {
+interface IEmptyStateProps {
+    isButtonNeeded: boolean;
+}
+
+export const EmptyState = ({ isButtonNeeded }: IEmptyStateProps) => {
     return <div className={s.emptyWrapper}>
         <img
             className={s.emptyState}
