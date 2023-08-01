@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import s from './Favourites.module.css'
 import { FavPagination } from '../common components/paginator/Paginator'
 import { FavStar, VacancyData } from '../vacancies/Vacancies'
@@ -10,7 +9,7 @@ import { IVacancy } from '../../types/vacancy.interface'
 
 export const Favourites = () => {
     const dispatch = useAppDispatch()
-    const favourites = useSelector(selectFav)
+    const favourites = useAppSelector(selectFav)
     const page = useAppSelector(state => state.favourites.page)
 
     const itemsPerPage = 4

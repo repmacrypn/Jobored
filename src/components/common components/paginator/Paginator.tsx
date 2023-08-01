@@ -1,11 +1,9 @@
-import { useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate'
 import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
 import s from './Paginator.module.css'
 import { setPageNumber } from '../../../redux/favSlice'
 import { saveQueryData } from '../../../redux/vacanciesSlice'
 import { useAppDispatch } from '../../../hooks/useAppHooks'
-import { AppDispatch } from '../../../redux/store'
 import { IVacanciesQuery } from '../../../types/vacanciesQuery.interface'
 
 interface IPaginationProps {
@@ -61,7 +59,7 @@ interface IFavPaginationProps {
 
 export const FavPagination = ({ totalCount, itemsPerPage, pageNumber }: IFavPaginationProps) => {
     const pageCount = Math.ceil(totalCount / itemsPerPage)
-    const dispatch: AppDispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
     const handlePageChange = ({ selected }: { selected: number }) => {
         dispatch(setPageNumber(selected))
@@ -82,7 +80,7 @@ interface IVacPaginationProps {
 }
 
 export const VacPagination = ({ totalCount, query }: IVacPaginationProps) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const pageCount = Math.ceil(totalCount / query.count)
 

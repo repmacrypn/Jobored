@@ -2,20 +2,20 @@ import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import s from './Header.module.css'
 import { setIsAuth, useLazyLoginQuery } from '../../redux/authSlice'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../hooks/useAppHooks'
 
 export const Header = () => {
     const [getLoginData] = useLazyLoginQuery()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         (async () => {
             if (!localStorage.getItem('accessToken')) {
-                const { data: { access_token, refresh_token }, isSuccess } = await getLoginData()
+                const { data, isSuccess } = await getLoginData(null)
 
                 if (isSuccess) {
-                    localStorage.setItem('accessToken', access_token)
-                    localStorage.setItem('refreshToken', refresh_token)
+                    localStorage.setItem('accessToken', data.access_token)
+                    localStorage.setItem('refreshToken', data.refresh_token)
                 }
             }
             dispatch(setIsAuth(true))
@@ -30,22 +30,22 @@ export const Header = () => {
                 </div>
                 <nav className={s.nav}>
                     <HeaderNavItem
-                        className='vacancies'
+                        classNameProp='vacancies'
                         text='Поиск Вакансий'
                         to='vacancies'
                     />
                     <HeaderNavItem
-                        className='fav'
+                        classNameProp='fav'
                         text='Избранное'
                         to='favourites'
                     />
                     <HeaderNavItem
-                        className='vacanciesIcon'
+                        classNameProp='vacanciesIcon'
                         text=' '
                         to='vacancies'
                     />
                     <HeaderNavItem
-                        className='favIcon'
+                        classNameProp='favIcon'
                         text=''
                         to='favourites'
                     />
@@ -55,13 +55,19 @@ export const Header = () => {
     )
 }
 
-const HeaderNavItem = React.memo(({ className, text, to }) => {
+interface IHeaderNavItemProps {
+    classNameProp: string;
+    text: string;
+    to: string;
+}
+
+const HeaderNavItem = React.memo(({ classNameProp, text, to }: IHeaderNavItemProps) => {
     return (
         <NavLink
-            className={({ isActive }) => `${isActive ? s.active : s.nonActive}`}
+            className={({ isActive }: { isActive: boolean }) => `${isActive ? s.active : s.nonActive}`}
             to={`/${to}`}
         >
-            <div className={s[className]}>
+            <div className={s[classNameProp]}>
                 {text}
             </div>
         </NavLink>
