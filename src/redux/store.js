@@ -12,7 +12,6 @@ import { apiSlice } from './apiSlice'
 const persistConfig = {
     key: 'root',
     storage,
-    /*  whitelist: ['favReducer'], */
 }
 
 const persistedFavReducers = persistReducer(persistConfig, favReducer)
