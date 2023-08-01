@@ -1,15 +1,17 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import s from './Favourites.module.css'
 import { FavPagination } from '../common components/paginator/Paginator'
 import { FavStar, VacancyData } from '../vacancies/Vacancies'
 import { EmptyState } from '../common components/emptyState/EmptyState'
 import { getFavourites, selectFav } from '../../redux/favSlice'
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppHooks'
+import { IVacancy } from '../../types/vacancy.interface'
 
 export const Favourites = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const favourites = useSelector(selectFav)
-    const page = useSelector(state => state.favourites.page)
+    const page = useAppSelector(state => state.favourites.page)
 
     const itemsPerPage = 4
 
@@ -19,7 +21,7 @@ export const Favourites = () => {
     }, [page, dispatch, favourites])
 
     if (!favourites.length) {
-        return <EmptyState isButtonNeeded={true} />;
+        return <EmptyState isButtonNeeded={true} />
     }
 
     return (
@@ -29,16 +31,15 @@ export const Favourites = () => {
                 totalCount={favourites.length}
                 itemsPerPage={itemsPerPage}
                 pageNumber={page}
-                dispatch={dispatch}
             />
         </div>
-    );
-};
+    )
+}
 
 const CurrentFavArray = () => {
-    const currentFavArray = useSelector(state => state.favourites.currentFavArray)
+    const currentFavArray = useAppSelector(state => state.favourites.currentFavArray)
 
-    const content = currentFavArray.map(obj => {
+    const content = currentFavArray.map((obj: IVacancy) => {
         return (
             <div
                 className={s.vacancy}
