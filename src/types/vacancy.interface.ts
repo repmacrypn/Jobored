@@ -5,6 +5,7 @@ export interface IVacancy {
     profession: string;
     currency: string;
     type_of_work: ITypeOfWork;
+    vacancyRichText: string;
     town: ITown;
 }
 

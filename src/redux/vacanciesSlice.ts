@@ -49,7 +49,7 @@ export const extendedVacanciesApiSlice = apiSlice.injectEndpoints({
                 return { vacancies: responseData.objects, total: responseData.total }
             }
         }),
-        getVacancy: builder.query<IVacanciesQuery, number>({
+        getVacancy: builder.query<IVacancy, string>({
             query: (vacancyId) => `vacancies/${vacancyId}`,
         }),
         getAllCatalogues: builder.query({
