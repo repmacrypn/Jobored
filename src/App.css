@@ -1,3 +1,8 @@
+html {
+    background-color: #F7F7F8;
+    overflow-x: hidden;
+}
+
 .appWrapper {
     background-color: #F7F7F8;
     height: var(--page-height);
