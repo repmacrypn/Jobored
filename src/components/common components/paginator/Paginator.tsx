@@ -1,12 +1,20 @@
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import ReactPaginate from 'react-paginate'
 import { ChevronLeft, ChevronRight } from 'tabler-icons-react'
 import s from './Paginator.module.css'
 import { setPageNumber } from '../../../redux/favSlice'
 import { saveQueryData } from '../../../redux/vacanciesSlice'
+import { useAppDispatch } from '../../../hooks/useAppHooks'
+import { AppDispatch } from '../../../redux/store'
+import { IVacanciesQuery } from '../../../types/vacanciesQuery.interface'
 
-export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
+interface IPaginationProps {
+    pageCount: number;
+    pageNumber: number;
+    handlePageChange: ({ selected }: { selected: number }) => void;
+}
+
+export const Pagination = ({ pageCount, pageNumber, handlePageChange }: IPaginationProps) => {
     return (
         <ReactPaginate
             previousLabel={
@@ -45,11 +53,18 @@ export const Pagination = ({ pageCount, pageNumber, handlePageChange }) => {
     )
 }
 
-export const FavPagination = ({ totalCount, itemsPerPage, pageNumber, dispatch }) => {
-    const pageCount = Math.ceil(totalCount / itemsPerPage)
+interface IFavPaginationProps {
+    totalCount: number;
+    itemsPerPage: number;
+    pageNumber: number;
+}
 
-    const handlePageChange = (e) => {
-        dispatch(setPageNumber(e.selected))
+export const FavPagination = ({ totalCount, itemsPerPage, pageNumber }: IFavPaginationProps) => {
+    const pageCount = Math.ceil(totalCount / itemsPerPage)
+    const dispatch: AppDispatch = useAppDispatch()
+
+    const handlePageChange = ({ selected }: { selected: number }) => {
+        dispatch(setPageNumber(selected))
     }
 
     return (
@@ -61,13 +76,18 @@ export const FavPagination = ({ totalCount, itemsPerPage, pageNumber, dispatch }
     )
 }
 
-export const VacPagination = ({ totalCount, query }) => {
+interface IVacPaginationProps {
+    totalCount: number;
+    query: IVacanciesQuery;
+}
+
+export const VacPagination = ({ totalCount, query }: IVacPaginationProps) => {
     const dispatch = useDispatch()
 
     const pageCount = Math.ceil(totalCount / query.count)
 
-    const handlePageChange = (e) => {
-        dispatch(saveQueryData({ ...query, page: e.selected }))
+    const handlePageChange = ({ selected }: { selected: number }) => {
+        dispatch(saveQueryData({ ...query, page: selected }))
     }
 
     return (

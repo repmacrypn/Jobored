@@ -2,16 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { apiSlice } from './apiSlice'
 import { RootState } from './store'
 import { IVacancy } from '../types/vacancy.interface'
-
-interface IVacanciesQuery {
-    agreed: number;
-    catalogue?: string;
-    paymentFrom?: string;
-    paymentTo?: string;
-    searchKeyWord?: string;
-    count: number;
-    page: number;
-}
+import { IVacanciesQuery } from '../types/vacanciesQuery.interface'
 
 interface IVacanciesState {
     query: IVacanciesQuery
