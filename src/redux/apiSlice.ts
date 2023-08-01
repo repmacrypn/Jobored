@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import { IAuthTokensResponse } from '../types/authTokensRes.interface'
 
 /* export const API_URL = 'https://cors-anywhere.herokuapp.com/https://api.superjob.ru/2.0/' */
 /* export const API_URL = 'https://api.superjob.ru/2.0/' */
@@ -22,11 +23,6 @@ const baseQuery = fetchBaseQuery({
     },
 })
 
-interface IRefreshTokenResult {
-    access_token: string;
-    refresh_token: string;
-}
-
 const baseQueryWithReAuth: BaseQueryFn<
     string | FetchArgs,
     unknown,
@@ -37,7 +33,7 @@ const baseQueryWithReAuth: BaseQueryFn<
     if (result.error && result.error.status === 410) {
         // try to get a new token
         const refreshResult = await baseQuery(`oauth2/refresh_token/?refresh_token=${localStorage.getItem('refreshToken')}&client_id=2355&client_secret=${SECRET_KEY}`, api, extraOptions)
-        const refreshData: IRefreshTokenResult = refreshResult?.data as IRefreshTokenResult
+        const refreshData: IAuthTokensResponse = refreshResult?.data as IAuthTokensResponse
         if (refreshData) {
             // store the new token
             localStorage.setItem('accessToken', refreshData.access_token)
