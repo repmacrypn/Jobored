@@ -1,14 +1,18 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import s from './Vacancies.module.css'
 import '../../styles/defaultStyles.css'
 import { modifyFavArray } from '../../redux/favSlice'
 import { processSalaryFieldAccom } from '../../utilites/processSalary'
 import { selectFav } from '../../redux/favSlice'
+import { IVacancy } from '../../types/vacancy.interface'
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppHooks'
 
-export const Vacancies = ({ vacancies }) => {
-    const mappedVacancies = vacancies.map(obj => {
+interface IVacanciesProps {
+    vacancies: IVacancy[];
+}
+
+export const Vacancies = ({ vacancies }: IVacanciesProps) => {
+    const mappedVacancies = vacancies.map((obj: IVacancy) => {
         return (
             <div
                 className={s.vacancy}
@@ -28,7 +32,12 @@ export const Vacancies = ({ vacancies }) => {
     return <div>{mappedVacancies}</div>
 }
 
-export const VacancyData = ({ obj, isDefault }) => {
+interface IVacancyDataProps {
+    obj: IVacancy;
+    isDefault: boolean;
+}
+
+export const VacancyData = ({ obj, isDefault }: IVacancyDataProps) => {
     const professionClassName = isDefault ?
         `${s.profession} titleSSemiBold` :
         `${s.profession} titleLBold`
@@ -59,7 +68,7 @@ export const VacancyData = ({ obj, isDefault }) => {
     )
 }
 
-const WorkConditionField = ({ isDefault, obj }) => {
+const WorkConditionField = ({ isDefault, obj }: IVacancyDataProps) => {
     const salaryClassName = isDefault ?
         `${s.salary} ${s.salaryDefaultFont}` :
         `${s.salary} titleSBold`
@@ -83,10 +92,14 @@ const WorkConditionField = ({ isDefault, obj }) => {
     )
 }
 
-export const FavStar = ({ obj }) => {
-    const favourites = useSelector(selectFav)
+interface IFavStarProps {
+    obj: IVacancy;
+}
 
-    const favStarResult = favourites.find(fav => {
+export const FavStar = ({ obj }: IFavStarProps) => {
+    const favourites = useAppSelector(selectFav)
+
+    const favStarResult = favourites.find((fav: IVacancy) => {
         return fav.id === obj.id
     }) ?
         <UniqueFavStar vacancyObj={obj} isFav={true} /> :
@@ -95,11 +108,16 @@ export const FavStar = ({ obj }) => {
     return <>{favStarResult}</>
 }
 
-const UniqueFavStar = ({ vacancyObj, isFav }) => {
-    const className = `favStar${isFav}`
-    const dispatch = useDispatch()
+interface IUniqueFavStarProps {
+    vacancyObj: IVacancy;
+    isFav: boolean;
+}
 
-    const onFavButtonClick = (vacancy, isFavCur) => {
+const UniqueFavStar = ({ vacancyObj, isFav }: IUniqueFavStarProps) => {
+    const className = `favStar${isFav}`
+    const dispatch = useAppDispatch()
+
+    const onFavButtonClick = (vacancy: IVacancy, isFavCur: boolean) => {
         dispatch(modifyFavArray({ vacancy, isFavCur }))
     }
 
