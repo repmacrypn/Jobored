@@ -1,3 +1,5 @@
+import { CSSObject } from "@mantine/core"
+
 export const ms = {
     select: {
         input: {
@@ -37,7 +39,7 @@ export const ms = {
                 font: 'normal 500 14px/20px Inter, sans-serif',
             },
         },
-        rightSection: { pointerEvents: 'none' },
+        rightSection: { pointerEvents: 'none' } as CSSObject,
     },
     numberInput: {
         input: {
