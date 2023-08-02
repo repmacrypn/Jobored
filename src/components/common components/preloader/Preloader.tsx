@@ -1,7 +1,8 @@
 import s from './Preloader.module.css'
 import preloader from '../../../resources/preloader/preloader.svg'
+import { IIsFullScreen } from '../../../types/isFullScreen.interface'
 
-const Preloader = ({ isFS }: { isFS: boolean }) => {
+const Preloader = ({ isFS }: IIsFullScreen) => {
     return (
         <div className={`${s.preloader} ${s[`preloader${isFS}`]}`}>
             <img alt='preloader' src={preloader} />

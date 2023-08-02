@@ -5,6 +5,15 @@
     align-items: center;
 }
 
+.emptyWrappertrue {
+    max-width: none;
+}
+
+.emptyWrapperfalse {
+    max-width: 773px;
+    width: 100%;
+}
+
 .emptyState {
     display: block;
     margin: 0 auto;

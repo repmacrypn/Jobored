@@ -20,7 +20,7 @@ export const Favourites = () => {
     }, [page, dispatch, favourites])
 
     if (!favourites.length) {
-        return <EmptyState isButtonNeeded={true} />
+        return <EmptyState isFS={true} />
     }
 
     return (

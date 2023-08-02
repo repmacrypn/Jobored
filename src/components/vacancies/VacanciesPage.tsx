@@ -29,7 +29,7 @@ export const ContentField = () => {
     const totalCount = total > 500 ? 500 : total
 
     if (isFetching) return <Preloader isFS={false} />
-    if (totalCount === 0) return <EmptyState isButtonNeeded={false} />
+    if (totalCount === 0) return <EmptyState isFS={false} />
 
     return isSuccess &&
         (
