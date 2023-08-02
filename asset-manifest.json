@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Jobored/static/css/main.9fafdd6c.css",
-    "main.js": "/Jobored/static/js/main.5bf0b008.js",
+    "main.css": "/Jobored/static/css/main.330e100e.css",
+    "main.js": "/Jobored/static/js/main.d5323a49.js",
     "static/js/787.28cb0dcd.chunk.js": "/Jobored/static/js/787.28cb0dcd.chunk.js",
     "static/media/emptyState.png": "/Jobored/static/media/emptyState.c982cca6fc34b1b92491.png",
     "static/media/preloader.svg": "/Jobored/static/media/preloader.85b3c1806e8fcaea6fec69ebf5a41da0.svg",
     "index.html": "/Jobored/index.html",
-    "main.9fafdd6c.css.map": "/Jobored/static/css/main.9fafdd6c.css.map",
-    "main.5bf0b008.js.map": "/Jobored/static/js/main.5bf0b008.js.map",
+    "main.330e100e.css.map": "/Jobored/static/css/main.330e100e.css.map",
+    "main.d5323a49.js.map": "/Jobored/static/js/main.d5323a49.js.map",
     "787.28cb0dcd.chunk.js.map": "/Jobored/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9fafdd6c.css",
-    "static/js/main.5bf0b008.js"
+    "static/css/main.330e100e.css",
+    "static/js/main.d5323a49.js"
   ]
 }
