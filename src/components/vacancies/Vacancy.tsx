@@ -14,7 +14,7 @@ export const Vacancy = () => {
     let vacancyRichText
 
     if (isSuccess) vacancyRichText = parse(vacancy.vacancyRichText || '')
-    if (isLoading) return <Preloader />
+    if (isLoading) return <Preloader isFS={true} />
 
     return (
         <div>

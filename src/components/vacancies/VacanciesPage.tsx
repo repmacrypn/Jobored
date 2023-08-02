@@ -11,7 +11,7 @@ import { useAppSelector } from '../../hooks/useAppHooks'
 
 export const VacanciesPage = () => {
     const isAuth = useAppSelector(selectIsAuth)
-    if (!isAuth) return <Preloader />
+    if (!isAuth) return <Preloader isFS={false} />
 
     return (
         <div className={`_mainContentField ${s.vacanciesWrapperField}`}>
@@ -28,7 +28,7 @@ export const ContentField = () => {
 
     const totalCount = total > 500 ? 500 : total
 
-    if (isFetching) return <Preloader />
+    if (isFetching) return <Preloader isFS={false} />
     if (totalCount === 0) return <EmptyState isButtonNeeded={false} />
 
     return isSuccess &&
