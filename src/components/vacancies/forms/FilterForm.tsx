@@ -49,7 +49,7 @@ export const Form = () => {
                 paymentFrom={fromNum}
                 paymentTo={toNum}
                 catalogue={selectValue}
-                searchKeyWord={searchKeyWord}
+                searchKeyWord={searchValue}
                 setSearchValue={setSearchValue}
             />
         </div>
