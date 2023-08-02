@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IVacancy } from '../types/vacancy.interface'
 import { RootState } from './store'
+import { IVacancy } from '../types/vacancy.interface'
 
 interface IFavState {
     favourites: IVacancy[],

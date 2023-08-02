@@ -6,7 +6,10 @@ import '../../../styles/defaultStyles.css'
 import dropDown from '../../../resources/images/dropDown.png'
 import dropDownOnFocus from '../../../resources/images/dropDownOnFocus.png'
 import { ms } from '../../../styles/mantineStyles'
-import { IAllCataloguesResponseData, saveQueryData, selectQueryData, useGetAllCataloguesQuery } from '../../../redux/vacanciesSlice'
+import {
+    IAllCataloguesResponseData, saveQueryData,
+    selectQueryData, useGetAllCataloguesQuery,
+} from '../../../redux/vacanciesSlice'
 import { processNoAgreement } from '../../../utilites/processNoAgreement'
 import { useAppDispatch, useAppSelector } from '../../../hooks/useAppHooks'
 
@@ -71,6 +74,7 @@ const FilterForm = ({ paymentFrom, paymentTo, catalogue, searchKeyWord, setFromN
 
     const resetAllOnClick = () => {
         const agreed = processNoAgreement('', '')
+
         setFromNum('')
         setToNum('')
         setSelectValue('')
@@ -229,7 +233,7 @@ const CustomNumberInput = memo(({ value, placeholder, setNum }: ICustomNumberInp
     )
 })
 
-const SubmitButton = ({ text, classNameProp, catalogue = '',
+const SubmitButton = ({ text, classNameProp, catalogue,
     paymentFrom, paymentTo, searchKeyWord }: IInputDataProps & ITextClassName) => {
     const dispatch = useAppDispatch()
 
