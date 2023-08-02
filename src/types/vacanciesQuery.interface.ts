@@ -1,9 +1,9 @@
 export interface IVacanciesQuery {
     agreed: number;
-    catalogue?: string;
-    paymentFrom?: string;
-    paymentTo?: string;
-    searchKeyWord?: string;
+    catalogue: string | null;
+    paymentFrom: '' | number;
+    paymentTo: '' | number;
+    searchKeyWord: string;
     count: number;
     page: number;
 }

@@ -1,22 +1,34 @@
-import React, { memo, useState } from 'react'
-import { Input, Select, NumberInput } from '@mantine/core'
+import { SetStateAction, memo, useState } from 'react'
+import { Select, NumberInput, TextInput } from '@mantine/core'
 import { Search } from 'tabler-icons-react'
-import { useDispatch, useSelector } from 'react-redux'
 import s from './FilterForm.module.css'
 import '../../../styles/defaultStyles.css'
 import dropDown from '../../../resources/images/dropDown.png'
 import dropDownOnFocus from '../../../resources/images/dropDownOnFocus.png'
 import { ms } from '../../../styles/mantineStyles'
-import { saveQueryData, selectQueryData, useGetAllCataloguesQuery } from '../../../redux/vacanciesSlice'
+import { IAllCataloguesResponseData, saveQueryData, selectQueryData, useGetAllCataloguesQuery } from '../../../redux/vacanciesSlice'
 import { processNoAgreement } from '../../../utilites/processNoAgreement'
+import { useAppDispatch, useAppSelector } from '../../../hooks/useAppHooks'
+
+interface IInputDataProps {
+    paymentFrom: number | '';
+    paymentTo: number | '';
+    catalogue: string | null;
+    searchKeyWord: string;
+}
+
+interface ITextClassName {
+    text: string;
+    classNameProp: string;
+}
 
 export const Form = () => {
-    const { catalogue, paymentFrom, paymentTo, searchKeyWord } = useSelector(selectQueryData)
+    const { catalogue = null, paymentFrom = '', paymentTo = '', searchKeyWord } = useAppSelector(selectQueryData)
 
-    const [fromNum, setFromNum] = useState(paymentFrom)
-    const [toNum, setToNum] = useState(paymentTo)
-    const [selectValue, setSelectValue] = useState(catalogue)
-    const [searchValue, setSearchValue] = useState(searchKeyWord)
+    const [fromNum, setFromNum] = useState<number | ''>(paymentFrom)
+    const [toNum, setToNum] = useState<number | ''>(paymentTo)
+    const [selectValue, setSelectValue] = useState<string | null>(catalogue)
+    const [searchValue, setSearchValue] = useState<string>(searchKeyWord)
 
     return (
         <div className={s.filterField}>
@@ -34,34 +46,40 @@ export const Form = () => {
                 paymentFrom={fromNum}
                 paymentTo={toNum}
                 catalogue={selectValue}
-                searchValue={searchValue}
+                searchKeyWord={searchKeyWord}
                 setSearchValue={setSearchValue}
             />
         </div>
     )
 }
 
-const FilterForm = ({ paymentFrom, paymentTo, catalogue, searchKeyWord,
-    setFromNum, setToNum, setSelectValue, setSearchValue }) => {
-    const dispatch = useDispatch()
+interface IFilterFormProps extends IInputDataProps {
+    setFromNum: React.Dispatch<SetStateAction<number | ''>>;
+    setToNum: React.Dispatch<SetStateAction<number | ''>>;
+    setSelectValue: React.Dispatch<SetStateAction<string | null>>;
+    setSearchValue: React.Dispatch<SetStateAction<string>>;
+}
 
-    const { data: allCatalogues = [] } = useGetAllCataloguesQuery()
+const FilterForm = ({ paymentFrom, paymentTo, catalogue, searchKeyWord, setFromNum,
+    setToNum, setSelectValue, setSearchValue }: IFilterFormProps) => {
+    const dispatch = useAppDispatch()
+
+    const { data: allCatalogues = [] } = useGetAllCataloguesQuery(null)
 
     const [focused, setFocused] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
 
-    const resetAllOnClick = (e) => {
+    const resetAllOnClick = () => {
         const agreed = processNoAgreement('', '')
-
         setFromNum('')
         setToNum('')
         setSelectValue('')
         setSearchValue('')
-
         dispatch(saveQueryData({ agreed, count: 4, page: 0, catalogue: '', paymentFrom: '', paymentTo: '', searchKeyWord: '' }))
     }
 
-    const cataloguesResult = allCatalogues.map(optObj => ({ value: optObj.key, label: optObj.title_trimmed }))
+    const cataloguesResult = allCatalogues.map((optObj: IAllCataloguesResponseData) =>
+        ({ value: String(optObj.key), label: optObj.title_trimmed }))
 
     return (
         <form className={s.filterFormField}>
@@ -74,7 +92,7 @@ const FilterForm = ({ paymentFrom, paymentTo, catalogue, searchKeyWord,
                 </div>
                 <Title
                     text='Отрасль'
-                    className='factoryLabel'
+                    classNameProp='factoryLabel'
                 />
                 <Select
                     value={catalogue}
@@ -105,7 +123,7 @@ const FilterForm = ({ paymentFrom, paymentTo, catalogue, searchKeyWord,
                 />
                 <Title
                     text='Оклад'
-                    className='salaryLabel'
+                    classNameProp='salaryLabel'
                 />
                 <CustomNumberInput
                     value={paymentFrom}
@@ -118,12 +136,12 @@ const FilterForm = ({ paymentFrom, paymentTo, catalogue, searchKeyWord,
                     placeholder='До'
                 />
                 <SubmitButton
-                    catalogue={catalogue}
                     paymentFrom={paymentFrom}
                     paymentTo={paymentTo}
+                    catalogue={catalogue}
                     searchKeyWord={searchKeyWord}
                     text='Применить'
-                    className='submitButton'
+                    classNameProp='submitButton'
                 />
             </div>
             <div
@@ -134,12 +152,16 @@ const FilterForm = ({ paymentFrom, paymentTo, catalogue, searchKeyWord,
     )
 }
 
-const SearchInput = ({ catalogue, paymentFrom, paymentTo, searchValue, setSearchValue }) => {
+interface ISearchInputProps extends IInputDataProps {
+    setSearchValue: React.Dispatch<SetStateAction<string>>;
+}
+
+const SearchInput = ({ catalogue, paymentFrom, paymentTo, searchKeyWord, setSearchValue }: ISearchInputProps) => {
     return (
         <form className={s.searchField}>
-            <Input
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
+            <TextInput
+                value={searchKeyWord}
+                onChange={(e) => setSearchValue(e.currentTarget.value)}
                 icon={<Search size={16} />}
                 iconWidth={30}
                 placeholder='Введите название вакансии'
@@ -150,9 +172,9 @@ const SearchInput = ({ catalogue, paymentFrom, paymentTo, searchValue, setSearch
                         catalogue={catalogue}
                         paymentFrom={paymentFrom}
                         paymentTo={paymentTo}
-                        searchKeyWord={searchValue}
+                        searchKeyWord={searchKeyWord}
                         text='Поиск'
-                        className='searchButton'
+                        classNameProp='searchButton'
                     />
                 }
                 styles={{
@@ -163,7 +185,12 @@ const SearchInput = ({ catalogue, paymentFrom, paymentTo, searchValue, setSearch
     )
 }
 
-const RightSectionImage = memo(({ src, alt }) => {
+interface IRightSectionImageProps {
+    src: string;
+    alt: string;
+}
+
+const RightSectionImage = memo(({ src, alt }: IRightSectionImageProps) => {
     return (
         <img
             src={src}
@@ -174,11 +201,17 @@ const RightSectionImage = memo(({ src, alt }) => {
     )
 })
 
-const CustomNumberInput = memo(({ value, placeholder, setNum }) => {
+interface ICustomNumberInputProps {
+    value: number | '';
+    placeholder: string;
+    setNum: React.Dispatch<SetStateAction<number | ''>>;
+}
+
+const CustomNumberInput = memo(({ value, placeholder, setNum }: ICustomNumberInputProps) => {
     return (
         <NumberInput
             value={value}
-            onChange={(value) => setNum(+value)}
+            onChange={(value) => setNum(value)}
             placeholder={placeholder}
             radius='md'
             rightSectionWidth={35}
@@ -196,10 +229,11 @@ const CustomNumberInput = memo(({ value, placeholder, setNum }) => {
     )
 })
 
-const SubmitButton = ({ text, className, catalogue, paymentFrom, paymentTo, searchKeyWord }) => {
-    const dispatch = useDispatch()
+const SubmitButton = ({ text, classNameProp, catalogue = '',
+    paymentFrom, paymentTo, searchKeyWord }: IInputDataProps & ITextClassName) => {
+    const dispatch = useAppDispatch()
 
-    const onSubmitButtonClick = (e) => {
+    const onSubmitButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const agreed = processNoAgreement(paymentFrom, paymentTo)
         dispatch(saveQueryData({ agreed, count: 4, page: 0, catalogue, paymentFrom, paymentTo, searchKeyWord }))
@@ -207,7 +241,7 @@ const SubmitButton = ({ text, className, catalogue, paymentFrom, paymentTo, sear
 
     return (
         <button
-            className={`${s[className]} ${s.defaultButtonStyles}`}
+            className={`${s[classNameProp]} ${s.defaultButtonStyles}`}
             onClick={onSubmitButtonClick}
         >
             {text}
@@ -215,9 +249,9 @@ const SubmitButton = ({ text, className, catalogue, paymentFrom, paymentTo, sear
     )
 }
 
-const Title = memo(({ text, className }) => {
+const Title = memo(({ text, classNameProp }: ITextClassName) => {
     return (
-        <div className={`${s[className]} textBaseMBold`}>
+        <div className={`${s[classNameProp]} textBaseMBold`}>
             {text}
         </div>
     )

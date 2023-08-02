@@ -40,6 +40,11 @@ interface IVacanciesResponseData {
     objects: IVacancy[];
 }
 
+export interface IAllCataloguesResponseData {
+    key: number;
+    title_trimmed: string;
+}
+
 export const extendedVacanciesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getVacancies: builder.query({
@@ -52,7 +57,7 @@ export const extendedVacanciesApiSlice = apiSlice.injectEndpoints({
         getVacancy: builder.query<IVacancy, string>({
             query: (vacancyId) => `vacancies/${vacancyId}`,
         }),
-        getAllCatalogues: builder.query({
+        getAllCatalogues: builder.query<IAllCataloguesResponseData[], null>({
             query: () => 'catalogues/',
         }),
     })
