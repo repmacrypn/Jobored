@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import s from './Favourites.module.css'
-import { FavPagination } from '../common components/paginator/Paginator'
-import { FavStar, VacancyData } from '../vacancies/Vacancies'
-import { EmptyState } from '../common components/emptyState/EmptyState'
+import { FavStar, VacancyData } from '@components/vacancies/Vacancies'
+import { EmptyState } from '@components/common components/emptyState/EmptyState'
 import { getFavourites, selectFav } from '../../redux/favSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppHooks'
+import { FavPagination } from '@components/common components/paginator/Paginator'
 import { IVacancy } from '../../types/vacancy.interface'
 
 export const Favourites = () => {
