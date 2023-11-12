@@ -27,7 +27,6 @@
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
     "tabler-icons-react": "^1.56.0",
-    "typescript": "^5.1.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -37,12 +36,6 @@
     "eject": "craco eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -57,7 +50,25 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
     "craco-alias": "^3.0.1",
-    "gh-pages": "^5.0.0"
+    "eslint": "^8.53.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "gh-pages": "^5.0.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   }
 }

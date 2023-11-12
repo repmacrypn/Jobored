@@ -1,0 +1,6 @@
+# Ignore artifacts:
+build
+coverage
+.gitignore
+node_modules
+.eslintignore
