@@ -9,8 +9,6 @@ import { Vacancy } from '@/components/vacancies/Vacancy'
 import './App.css'
 
 export const App = () => {
-  const tempVar = 5
-
   return (
     <>
       <Header />
