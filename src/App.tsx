@@ -1,12 +1,16 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+
+import PageNotFound from '@/components/common components/404/PageNotFound'
+import { Favourites } from '@/components/favourites/Favourites'
+import { Header } from '@/components/header/Header'
+import { VacanciesPage } from '@/components/vacancies/VacanciesPage'
+import { Vacancy } from '@/components/vacancies/Vacancy'
+
 import './App.css'
-import { Header } from './components/header/Header'
-import { VacanciesPage } from './components/vacancies/VacanciesPage'
-import { Favourites } from './components/favourites/Favourites'
-import { Vacancy } from './components/vacancies/Vacancy'
-import PageNotFound from './components/common components/404/PageNotFound'
 
 export const App = () => {
+  const tempVar = 5
+
   return (
     <>
       <Header />
