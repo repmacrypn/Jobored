@@ -1,3 +1,3 @@
 export interface IIsFullScreen {
-    isFS: boolean;
+  isFS: boolean
 }

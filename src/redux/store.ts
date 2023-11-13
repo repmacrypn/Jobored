@@ -1,34 +1,41 @@
 import { configureStore } from '@reduxjs/toolkit'
-import storage from 'redux-persist/lib/storage'
 import {
-    persistStore, persistReducer, FLUSH,
-    REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
 } from 'redux-persist'
-import vacanciesReducer from './vacanciesSlice'
-import favReducer from './favSlice'
-import authReducer from './authSlice'
-import { apiSlice } from './apiSlice'
+import storage from 'redux-persist/lib/storage'
+
+import { apiSlice } from '@/redux/apiSlice'
+import authReducer from '@/redux/authSlice'
+import favReducer from '@/redux/favSlice'
+import vacanciesReducer from '@/redux/vacanciesSlice'
 
 const persistConfig = {
-    key: 'root',
-    storage,
+  key: 'root',
+  storage,
 }
 
 const persistedFavReducers = persistReducer(persistConfig, favReducer)
 
 export const store = configureStore({
-    reducer: {
-        [apiSlice.reducerPath]: apiSlice.reducer,
-        vacancies: vacanciesReducer,
-        favourites: persistedFavReducers,
-        auth: authReducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }).concat(apiSlice.middleware),
+  reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    vacancies: vacanciesReducer,
+    favourites: persistedFavReducers,
+    auth: authReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(apiSlice.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>
