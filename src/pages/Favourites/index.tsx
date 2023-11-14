@@ -2,12 +2,11 @@ import { useEffect } from 'react'
 
 import { EmptyState } from '@/components/common components/emptyState/EmptyState'
 import { FavPagination } from '@/components/common components/paginator/Paginator'
-import { FavStar, VacancyData } from '@/components/vacancies/Vacancies'
+import { CurrentFavArray } from '@/components/favourites/Favourites'
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppHooks'
 import { getFavourites, selectFav } from '@/redux/favSlice'
-import { IVacancy } from '@/types/vacancy.interface'
 
-import s from './Favourites.module.css'
+import s from './styles.module.scss'
 
 export const Favourites = () => {
   const dispatch = useAppDispatch()
@@ -41,19 +40,4 @@ export const Favourites = () => {
       />
     </div>
   )
-}
-
-export const CurrentFavArray = () => {
-  const currentFavArray = useAppSelector((state) => state.favourites.currentFavArray)
-
-  const content = currentFavArray.map((obj: IVacancy) => {
-    return (
-      <div className={s.vacancy} key={obj.id}>
-        <VacancyData isDefault obj={obj} />
-        <FavStar obj={obj} />
-      </div>
-    )
-  })
-
-  return <div>{content}</div>
 }
