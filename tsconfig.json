@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["dom","dom.iterable","esnext"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -9,19 +9,14 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "module": "es6",
+    "module": "esnext",
     "target": "es5",
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
     "noEmit": true
   },
-  "include": [
-    "src",
-    "**/*.ts",
-    "**/*.tsx",
-    "declare.d.ts"
-  ],
+  "include": ["src", "**/*.ts", "**/*.tsx", "declare.d.ts"],
   "exclude": ["node_modules"],
   "extends": "./tsconfig.extend.json"
 }
