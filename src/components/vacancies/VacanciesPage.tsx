@@ -2,7 +2,7 @@ import { EmptyState } from '@/components/common components/emptyState/EmptyState
 import { VacPagination } from '@/components/common components/paginator/Paginator'
 import Preloader from '@/components/common components/preloader/Preloader'
 import { Form } from '@/components/vacancies/forms/FilterForm'
-import { Vacancies } from '@/components/vacancies/Vacancies'
+import { VacanciesBlock } from '@/components/vacancies/Vacancies'
 import { useAppSelector } from '@/hooks/useAppHooks'
 import { selectIsAuth } from '@/redux/authSlice'
 import { selectQueryData, useGetVacanciesQuery } from '@/redux/vacanciesSlice'
@@ -40,7 +40,7 @@ export const ContentField = () => {
   return (
     isSuccess && (
       <div className={s.contentField}>
-        <Vacancies vacancies={vacancies} />
+        <VacanciesBlock vacancies={vacancies} />
         <VacPagination query={query} totalCount={totalCount} />
       </div>
     )

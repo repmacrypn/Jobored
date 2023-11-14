@@ -4,7 +4,7 @@ import { HashRouter } from 'react-router-dom'
 import { MantineProvider } from '@mantine/core'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { App } from '@/App'
+import { App } from '@/components/App'
 import { persistor, store } from '@/redux/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
