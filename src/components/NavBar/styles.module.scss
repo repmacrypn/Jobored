@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  gap: 60px;
+  height: 20px;
+  width: 275px;
+  position: absolute;
+  top: 32px;
+  left: 37.72%;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+
+  a {
+    text-decoration: none;
+    display: block;
+  }
+
+  @media (max-width: 485px) {
+    width: 200px;
+    left: 32.72%;
+  }
+
+  @media (max-width: 380px) {
+    left: 22%;
+  }
+}
