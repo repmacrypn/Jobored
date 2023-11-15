@@ -43,7 +43,7 @@ export const Favourites = () => {
   )
 }
 
-const CurrentFavArray = () => {
+export const CurrentFavArray = () => {
   const currentFavArray = useAppSelector((state) => state.favourites.currentFavArray)
 
   const content = currentFavArray.map((obj: IVacancy) => {

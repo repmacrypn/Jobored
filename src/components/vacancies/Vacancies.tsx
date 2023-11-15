@@ -12,7 +12,7 @@ interface IVacanciesProps {
   vacancies: IVacancy[]
 }
 
-export const Vacancies = ({ vacancies }: IVacanciesProps) => {
+export const VacanciesBlock = ({ vacancies }: IVacanciesProps) => {
   const mappedVacancies = vacancies.map((obj: IVacancy) => {
     return (
       <div className={s.vacancy} key={obj.id}>
