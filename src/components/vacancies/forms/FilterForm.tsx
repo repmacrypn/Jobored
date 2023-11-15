@@ -12,7 +12,7 @@ import {
 import dropDown from '@/resources/images/dropDown.png'
 import dropDownOnFocus from '@/resources/images/dropDownOnFocus.png'
 import { ms } from '@/styles/mantineStyles'
-import { processNoAgreement } from '@/utilites/processNoAgreement'
+import { processNoAgreement } from '@/utils/helpers/processNoAgreement'
 
 import '@/styles/defaultStyles.css'
 import s from './FilterForm.module.css'

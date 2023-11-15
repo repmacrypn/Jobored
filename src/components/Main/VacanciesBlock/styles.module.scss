@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  width: 69.265%;
+  max-width: 773px;
+  position: relative;
+  top: 104px;
+
+  @media (max-width: 1130px) {
+    width: 100%;
+  }
+}
+
+.vacancy {
+  background-color: #ffffff;
+  border: 1px solid #eaebed;
+  border-radius: 12px;
+  position: relative;
+  width: 100%;
+  max-width: 773px;
+  min-height: 137px;
+  padding: 24px;
+  margin-bottom: 16px;
+}

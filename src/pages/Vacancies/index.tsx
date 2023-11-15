@@ -1,6 +1,6 @@
-import Preloader from '@/components/common components/preloader/Preloader'
+import { Loader } from '@/components/Loader'
+import { VacanciesBlock } from '@/components/Main/VacanciesBlock'
 import { Form } from '@/components/vacancies/forms/FilterForm'
-import { ContentField } from '@/components/vacancies/VacanciesPage'
 import { useAppSelector } from '@/hooks/useAppHooks'
 import { selectIsAuth } from '@/redux/authSlice'
 
@@ -10,12 +10,12 @@ import s from './styles.module.scss'
 export const Vacancies = () => {
   const isAuth = useAppSelector(selectIsAuth)
 
-  if (!isAuth) return <Preloader isFS={false} />
+  if (!isAuth) return <Loader isFS={false} />
 
   return (
     <div className={`_mainContentField ${s.vacanciesWrapperField}`}>
       <Form />
-      <ContentField />
+      <VacanciesBlock />
     </div>
   )
 }

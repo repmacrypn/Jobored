@@ -1,4 +1,4 @@
-import { EmptyState } from '@/components/common components/emptyState/EmptyState'
+/* import { EmptyState } from '@/components/common components/emptyState/EmptyState'
 import { VacPagination } from '@/components/common components/paginator/Paginator'
 import Preloader from '@/components/common components/preloader/Preloader'
 import { Form } from '@/components/vacancies/forms/FilterForm'
@@ -46,3 +46,4 @@ export const ContentField = () => {
     )
   )
 }
+ */

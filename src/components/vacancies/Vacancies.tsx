@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+/* import { NavLink } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppHooks'
 import { modifyFavArray, selectFav } from '@/redux/favSlice'
@@ -111,3 +111,4 @@ const UniqueFavStar = ({ vacancyObj, isFav }: IUniqueFavStarProps) => {
     />
   )
 }
+ */

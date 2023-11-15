@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+/* import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
 
 import Preloader from '@/components/common components/preloader/Preloader'
@@ -29,3 +29,4 @@ export const Vacancy = () => {
     </div>
   )
 }
+ */
