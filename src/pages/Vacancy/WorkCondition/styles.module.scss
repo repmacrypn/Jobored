@@ -1,0 +1,53 @@
+.workConditField {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.salary {
+  margin-bottom: 13px;
+
+  @media (max-width: 580px) {
+    font-size: 18px;
+  }
+}
+
+.salaryDefaultFont {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #232134;
+}
+
+.point {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 21px;
+  color: #7b7c88;
+}
+
+.typeOfWork {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #232134;
+}
+
+.typeOfWorkNotDef {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+  color: #232134;
+
+  @media (max-width: 580px) {
+    font-size: 18px;
+  }
+}

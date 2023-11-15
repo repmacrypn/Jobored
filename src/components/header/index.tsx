@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
+/* import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { useAppDispatch } from '@/hooks/useAppHooks'
 import { setIsAuth, useLazyLoginQuery } from '@/redux/authSlice'
 
-import s from './Header.module.css'
+import s from './styles.module.scss'
 
 export const Header = () => {
-  const [getLoginData] = useLazyLoginQuery()
   const dispatch = useAppDispatch()
+  const [getLoginData] = useLazyLoginQuery()
 
   useEffect(() => {
     ;(async () => {
@@ -57,3 +57,4 @@ const HeaderNavItem = React.memo(({ classNameProp, text, to }: IHeaderNavItemPro
     </NavLink>
   )
 })
+ */

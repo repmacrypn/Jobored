@@ -1,0 +1,21 @@
+.favStar {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 22px;
+  height: 22px;
+  background: no-repeat 0px 0px/22px 22px;
+
+  &:hover {
+    cursor: pointer;
+    background-image: url('../../resources/images/StarOnHover.png');
+  }
+}
+
+.favStartrue {
+  background-image: url('../../resources/images/StarFav.png');
+}
+
+.favStarfalse {
+  background-image: url('../../resources/images/StarNotFav.png');
+}

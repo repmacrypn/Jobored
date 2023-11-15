@@ -1,0 +1,47 @@
+.contentFiled {
+  margin: auto;
+  padding-top: 40px;
+  max-width: 773px;
+  display: flex;
+  flex-direction: column;
+  gap: 88px;
+}
+
+@media (max-width: 780px) {
+  .contentFiled {
+    max-width: none;
+    padding: 40px 15px 0 15px;
+  }
+}
+
+.vacancy {
+  background-color: #ffffff;
+
+  border: 1px solid #eaebed;
+  border-radius: 12px;
+
+  position: relative;
+
+  max-width: 773px;
+  min-height: 137px;
+
+  margin-bottom: 16px;
+  padding: 24px;
+}
+
+.favStar {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 22px;
+  height: 22px;
+}
+
+.fav {
+  background: url('../../resources/images/StarFav.png') no-repeat 0px 0px/22px 22px;
+}
+
+.favStar:hover {
+  background: url('../../resources/images/StarOnHover.png') no-repeat 0px 0px/22px 22px;
+  cursor: pointer;
+}

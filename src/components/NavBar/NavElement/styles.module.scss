@@ -1,0 +1,52 @@
+.vacancies {
+  width: 130px;
+
+  @media (max-width: 485px) {
+    display: none;
+  }
+}
+
+.favIcon,
+.vacanciesIcon {
+  display: none;
+}
+
+.active {
+  font-weight: 500;
+  color: #5e96fc;
+}
+
+.nonActive {
+  font-weight: 400;
+  color: #232134;
+}
+
+@media (max-width: 485px) {
+  .fav {
+    display: none;
+  }
+
+  .favIcon,
+  .vacanciesIcon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: no-repeat 0 0/30px 30px;
+  }
+
+  .nonActive .favIcon {
+    background-image: url('../../resources/images/favIcon.png');
+  }
+
+  .nonActive .vacanciesIcon {
+    background-image: url('../../resources/images/searchIcon.png');
+  }
+
+  .active .favIcon {
+    background-image: url('../../resources/images/favIconOnHover.png');
+  }
+
+  .active .vacanciesIcon {
+    background-image: url('../../resources/images/searchIconOnHover.png');
+  }
+}
