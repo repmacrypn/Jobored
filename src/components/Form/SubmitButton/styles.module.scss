@@ -1,0 +1,52 @@
+.defaultButtonStyles {
+  padding: 4px 20px;
+  text-align: center;
+  background-color: #5e96fc;
+  color: #ffffff;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+
+  &:hover {
+    background-color: #92c1ff;
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: #3b7cd3;
+    cursor: pointer;
+  }
+}
+
+.submitButton {
+  margin-top: 20px;
+  display: block;
+  width: 275px;
+  height: 40px;
+
+  @media (max-width: 1130px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 330px;
+  }
+
+  @media (max-width: 440px) {
+    width: 180px;
+  }
+}
+
+.searchButton {
+  display: inline-block;
+  width: 83px;
+  height: 32px;
+
+  @media (max-width: 440px) {
+    width: 60px;
+    padding: 0;
+    margin-left: 20px;
+  }
+}

@@ -2,10 +2,9 @@ import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
 
 import { Loader } from '@/components/Loader'
+import { VacancyData } from '@/pages/Vacancy/Data'
+import { FavStar } from '@/pages/Vacancy/FavStar'
 import { useGetVacancyQuery } from '@/redux/vacanciesSlice'
-
-import { VacancyData } from './Data'
-import { FavStar } from './FavStar'
 
 import s from './styles.module.scss'
 

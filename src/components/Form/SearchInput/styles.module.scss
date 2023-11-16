@@ -1,0 +1,18 @@
+.searchField {
+  position: absolute;
+  left: 342px;
+  bottom: 310px;
+
+  @media (max-width: 1130px) {
+    position: static;
+    margin-top: 40px;
+    max-width: 773px;
+    width: 100%;
+  }
+
+  @media (max-width: 544px) {
+    position: absolute;
+    left: 0;
+    bottom: -70px;
+  }
+}
