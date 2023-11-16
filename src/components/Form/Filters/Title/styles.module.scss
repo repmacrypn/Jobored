@@ -1,0 +1,15 @@
+.factoryLabel {
+  margin-top: 32px;
+  padding-bottom: 8px;
+}
+
+.salaryLabel {
+  padding-bottom: 8px;
+}
+
+@media (max-width: 1130px) {
+  .factoryLabel,
+  .salaryLabel {
+    text-align: center;
+  }
+}

@@ -1,0 +1,88 @@
+.wrapper {
+  width: 275px;
+  max-height: 320px;
+  padding: 0px;
+  position: relative;
+
+  @media (max-width: 1130px) {
+    width: 80%;
+  }
+}
+
+.resetAllField {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding-right: 17px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #acadb9;
+  background: url('../../../resources/images/resetDefault.jpg') no-repeat 97px 2.5px/16px
+    16px;
+
+  &:hover {
+    cursor: pointer;
+    color: #92c1ff;
+    background: url('../../../resources/images/resetHover.png') no-repeat 97px 2.5px/16px
+      16px;
+  }
+
+  &:active {
+    cursor: pointer;
+    color: #5e96fc;
+    background: url('../../../resources/images/resetPressed.png') no-repeat 97px 2.5px/16px
+      16px;
+  }
+
+  img {
+    display: inline-block;
+    margin-bottom: 1px;
+  }
+
+  @media (max-width: 544px) {
+    top: 1px;
+    right: 30px;
+  }
+}
+
+.filterDropDown {
+  display: none;
+}
+
+@media (max-width: 544px) {
+  .filtersfalse {
+    display: none;
+  }
+
+  .filterstrue {
+    visibility: visible;
+  }
+
+  .fdd {
+    display: block;
+    position: absolute;
+    right: -15px;
+    top: -5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: no-repeat 0 0/30px 30px;
+  }
+
+  .filterDropDownfalse {
+    background-image: url('../../../resources/images/fdd.png');
+  }
+
+  .filterDropDowntrue {
+    background-image: url('../../../resources/images/fddActive.png');
+  }
+
+  .filterDropDownfalse:hover {
+    background-image: url('../../../resources/images/fddOnHoverF.png');
+  }
+
+  .filterDropDowntrue:hover {
+    background-image: url('../../../resources/images/fddOnHoverT.png');
+  }
+}
